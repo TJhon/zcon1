@@ -2,5 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-.css
-.sh
+*.css
+*.sh
+temas.rmd
