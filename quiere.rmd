@@ -1,0 +1,73 @@
+---
+title: "Trabajo de ivestigacion"
+subtitle: "Centrarse en lo siguiente /n "
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Caratula
+
+# Resumen 1 
+
+- Objetivo
+- Metodologia 
+- Resultados 
+
+# introduccion 2-3
+
+- Plantear el probleam 
+    - Importancia del problema, 
+
+# antecedentes teoricos 2 3 
+
+- Trabajos importantes de las variables
+- Resumir los temas relevantes de la teoria 
+- Trabajos previos 
+- Textos, libros 
+
+# Antecedentes empiricos 2 - 3
+
+- Trabajo mas importantes de las variables 
+    - Papers(nacional e internacionales) 
+- Resultados de los estudios empiricos 
+
+# Hechos estilizados 2
+
+- Basados en papers del bcrp, 
+  - Estadisticas 
+  - Cuadros, 
+  - Graficos (barras, lineales , histogramas , scatter plot) 
+    - Muestran indicios 
+- Caracteristicas relevantes de las variables 
+
+# Modelo teorico 2
+
+- Escoger un modelo relacionado con los hechos estilizados  - 
+- Explicar por que se escogio el modelo modelo 
+
+# Hipotesis 1
+
+- Respuesta abticipada, 
+  - Coportamiento de las variables 
+
+# Metodologia  2-3
+
+- Decribir el modelo econonetrico 
+- Senalar el metodo que se va a utlizar 
+- Explicar las variables 
+  - Matriz de consistencia 
+- Datos reales o nominales (definidos)
+
+# Resultados 5
+
+- Estimaciones 
+  - Tablas 
+  - Grafico  
+  - Preubas de hupotesis 
+  - Nivel de confiabilidad de los resultados    
+
+- Conclusion es 
+- Recomendaciones 
+
+# Referencia bibliografica 
