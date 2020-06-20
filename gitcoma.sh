@@ -38,3 +38,5 @@ git status
 ## 2 
 
 git status
+
+git commit -m "Busqueda de datos(mensuales), referencias hecho a excepcion del capital(puede esperar) "
