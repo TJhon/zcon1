@@ -1,0 +1,15 @@
+---
+title: "Investigacion 1"
+author: 'yo'
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+lang: es
+---
+
+```{r setup, echo=FALSE, warning=FALSE, include=TRUE}
+# import code  
+plot(mtcars)
+```
+
