@@ -2,7 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+temas.rmd
+gitcoma.sh
 *.css
 *.sh
-temas.rmd
 *.docx

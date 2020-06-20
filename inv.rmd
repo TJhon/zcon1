@@ -1,5 +1,5 @@
 ---
-title: "Investigacion 1"
+title: "Crecimiento economico y consumo de energia"
 author: 'yo'
 output:
   word_document: default
@@ -10,6 +10,6 @@ lang: es
 
 ```{r setup, echo=FALSE, warning=FALSE, include=TRUE}
 # import code  
-plot(mtcars)
+# libreris necesarias 
 ```
 
