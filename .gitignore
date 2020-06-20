@@ -9,3 +9,6 @@ ref.md
 *.sh
 *.docx
 *.md
+*.xlsx
+*.xls
+datos/excel
