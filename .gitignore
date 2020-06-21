@@ -11,3 +11,4 @@ gitcoma.sh
 *.xlsx
 *.xls
 datos/excel
+datos/rds
