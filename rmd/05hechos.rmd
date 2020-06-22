@@ -1,0 +1,7 @@
+# Hechoso stilizados 
+<!-- 2 paginas -->
+<!-- A mi entender es estadistica descriptiva  -->
+<!-- En base a papers del bcrp -->
+<!-- cuadros estadisticos -->
+<!-- graficos: barras, lineales, histogramas, puntos - scatter_plot -->
+<!-- caracteristicas relevantes de las variables -->

@@ -1,0 +1,7 @@
+# Metodologia 
+
+<!-- 2 - 3 paginas -->
+<!-- describir el modelo econometirco que se va a utilizar -->
+<!-- senaliar el metodo que se va a utilizar: metodo? inductivo deductivo? -->
+<!-- explicar las variables: como se trataron los datos, indicadores fuente -->
+<!-- Definir si son datos reales o datos nominales -->

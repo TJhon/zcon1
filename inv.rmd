@@ -8,6 +8,10 @@ output:
 lang: es
 ---
 
+
+<!-- lo que esta escrito en estos signos se omiten en la compilacion del documento -->
+
+
 ```{r setup, echo=FALSE, warning=FALSE, include=TRUE}
 # import code  
 # libreris necesarias 

@@ -4,11 +4,12 @@
 .Ruserdata
 temas.rmd
 gitcoma.sh
+datos/excel
+datos/rds
 *.css
-*.sh
 *.docx
 *.md
 *.xlsx
 *.xls
-datos/excel
-datos/rds
+*.sh
+*.html
