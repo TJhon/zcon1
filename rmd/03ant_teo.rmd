@@ -5,4 +5,46 @@
 <!-- > Resumir temas relevantes para esta teoria  -->
 <!-- > Trabajos previos que mencionen la relacion  -->
 
+En la literatura para identificar la relacion de precios, consumo energetico y crecimiento economico
+tanto en paises desarrollados como en desarrollo. Se menciona a 
+*toman y Jenelkova 2003* sostienen que el crecimiento economico es el principal
+motor de la demanda de energia, y que unicamente economias avanzadas, con un alto  
+grado de capacidad de innovación, pueden disminuir el consumo de energia sin reducir 
+el crecimiento economico 
+
+
+
+
+# Antecedentes empiricos
+ 
+<!-- 2-3 paginas -->
+<!-- investigaciones previas que muestren la relacion de estas variables -->
+<!-- centrarse en los  resultados-->
+
+## Crecimiento economico y el consumo de energia 
+
+
+La conexión y el crecimiento económico ha sido uno 
+de los temas más sofisticados de muchos años^[Pregunta: Es necesario mencionr el metodo y el resultado de las estimaciones o es sufiente con mencional que la relacion positva o que hubo relacion causal?] y se
+ha llevado a cabo en muchas regiones del mundo empleando 
+diferentes métodos y obteniendo diferentes resultados para 
+diferentes regiones debido a factores regionales y a la 
+utilización de energía. *khan 2019*^[Referencias: por el momento no estan automatizadas] para una muestra de 193 paises muestra una 
+que el desarrollo financiero, consumo de energia y el crecimiento economico se afectan entre si
+*muhammad 2019* encontro una asociacion positiva entre 
+el consumo de energia y el consumo percapita, *esso y keho (2016)* econtraron 
+que en largo plazo el crecimiento economico y el consumo de energia estan relacionados,
+*farhani y ben rejeb 2912* econtraron que para los paisesde bajos y altos ingresos, 
+la causalidad en el largo plazo de la crecimiento economico y el cosumo de energia
+mientras que en los paises de ingresos medios y medios-altos, la causalidad de 
+Granger entre el crecimiento economico y el consumo de energia.
+*Ang 2018* demostro que el largo plazo el consumo de energia estan relacionadas positivamente con el producto bruto interno.
+*ainko 2008* para paises de africa mostro una realacion unidireccion que va desde el 
+aumento de la actividad economica hacia el consumo de energia. *vietnam *binh 2011*
+descubrio la causalidad unidireccional que va desde el crecimiento percapita hasta el consumo de energia .
+*usa warr y ayres 2010* encunetra una asociacion causal unilateral desde el consumo de 
+energia hasta el crecimiento economico, mientras que no encuentran pruebas para una relacion causal que va desde el 
+crecimiento economico hasta el consumo de energia. *bildirict et al. 2012* encontraron conexiones bilaterales
+entre el consumo de energia y el PIB percapita.
+
 

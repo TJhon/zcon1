@@ -27,9 +27,6 @@ lang: es
 ```{r teoria, child = 'rmd/03ant_teo.rmd'}
 ```
 
-```{r empirico, child = 'rmd/04ant_emp.rmd'}
-```
-
 ```{r hecho, child = 'rmd/05hechos.rmd'}
 ```
 

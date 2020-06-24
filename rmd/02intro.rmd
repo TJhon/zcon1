@@ -3,9 +3,40 @@
 <!-- 2 - 3 paginas -->
 <!-- > Planteamiento del problema: la importancia del tema  -->
 
+```{r}
+fecha <- "hoy"
+dato <- "pib nacional"
+cosnstante <- 10
+hoy <- "hoy"
+
+```
+
+
 Mantener el crecimiento economico es un problema de todas las naciones,
 ya que tener un crecimiento economico es vital para poder acumular capital y asi 
 poder reducir la pobreza, seguido de una adecuadadistribucion de activos fisicos y de capital humano
 
 Es por ello de la importancia de conocer los factore que influyen en una tasa de 
-crecimiento sostenido 
+crecimiento sostenido. El consumo de energia electrica es un factor que se genera 
+por la mayor actividad de la economica como tambien condicion necesaria para que esta
+se pueda expandir.
+
+El Producto Interno Bruto (PIB) de la nacion en `r fecha` asciende a `r dato` a precios 
+constantes del `r cosnstante`, disminuyo en los ultimos meses a causa de 
+la crisis sanitaria que al dia de hoy `r hoy` aun se mantiene. El crecimiento economico del
+sector electrico que pudo operar con normalidad en esta crisis tambein disminuyo
+en los ultimos meses.
+ 
+```{r <chunk-label>, echo = FALSE, fig.cap = 'FigureCaption'}
+# knitr::include_graphics('grafico del pib nacional y sectorial')
+```
+```{r}
+crecimiento <- 12
+periodo <- 12
+```
+
+Asi mismo el Producto Interno por habitante (PIB per capita) 
+que muestra el nivel de riqueza o binestar en niveles monetarios en un 
+momento determinado, sigue el mismo que el PIB
+comportamiento, la tasa de crecimiento se encuentra al rededor de `r crecimiento`%
+en el periodo `r periodo`, con tendencia a la baja.
