@@ -19,4 +19,32 @@ lang: es
 
 # Caratula 
 
+```{r resumen, child = 'rmd/01resumen.rmd'}
+
+```{r introduccion, child = 'rmd/02intro.rmd'}
+```
+
+```{r teoria, child = 'rmd/03ant_teo.rmd'}
+```
+
+```{r empirico, child = 'rmd/04ant_emp.rmd'}
+```
+
+```{r hecho, child = 'rmd/05hechos.rmd'}
+```
+
+```{r modelo, child = 'rmd/06model.rmd'}
+```
+
+```{r hipotesis, child = 'rmd/07hipo.rmd'}
+```
+
+```{r metodologia, child = 'rmd/08metod.rmd'}
+```
+
+```{r resultados, child = 'rmd/09resul.rmd'}
+```
+
+```{r fila, child = 'rmd/10final.rmd'}
+```
 
