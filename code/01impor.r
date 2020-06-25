@@ -135,12 +135,14 @@ p_gas84 <- read_xlsx(here("datos", "excel", "pre_traf_ipc", "p_gas84.xlsx")) %>%
   rename(mes_anio = 1, 
          ipc = 2) %>% 
   mutate(sector = "gas84")
+
 ipc1 <- bind_rows(t_inds, t_reis, p_gas84) %>% 
   separate(mes_anio, c("mes", "anio"), "(?<=[a-z])(?=[0-9])") %>% 
   mutate(anio1 = "20") %>% 
   select(anio1, anio, everything()) %>% 
   unite(anio, anio1:anio, sep = "") %>% 
-filter(anio != "2020") %>% 
+
+  filter(anio != "2020") %>% 
   mutate(mes1 = rep(1:12, 30)) %>% 
   select(-mes) %>% 
   mutate(anio = parse_number(anio),

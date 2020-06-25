@@ -5,12 +5,51 @@
 <!-- > Resumir temas relevantes para esta teoria  -->
 <!-- > Trabajos previos que mencionen la relacion  -->
 
-En la literatura para identificar la relacion de precios, consumo energetico y crecimiento economico
-tanto en paises desarrollados como en desarrollo. Se menciona a 
-*toman y Jenelkova 2003* sostienen que el crecimiento economico es el principal
-motor de la demanda de energia, y que unicamente economias avanzadas, con un alto  
-grado de capacidad de innovación, pueden disminuir el consumo de energia sin reducir 
-el crecimiento economico 
+El conocimiento de la causalidad entre el consumo de energia y el crecimiento 
+economico es de vital importancia para la toma de politicas energeticas adecuadas.
+Existe un debate donde si el consumo de energia electrica estimula, retrasa o es neutral
+para el crecimiento economico. Existen 4 puntos de vista o posibles opcions de causalidad
+entre el consumo de energia electrica y el crecimiento economico. ^[*odhiambo 2009, payne 2010, ozturk 2010*]
+
+1. Hipotesis crecimiento ^[*ebohon 1996 citado por Templete, 1999*]
+
+Sostiene una relacion causal unidireccional del consumo de energia hacia el crecimiento 
+economico, las politicas de conservacion energeticas orientadas a disminuir la 
+demanda de energia electrica puede tener efectos negativos sobre el crecimiento economico.
+
+2. Hipotesis Conservadora^[*wolde rufael,2010;  damette y seghir 2013; 2017a shakbaz etal 2017, citados por hamisu sadi ali*]
+
+Afirman que la productividad economica estimula el consumo de energia
+
+Establece relacion unidireccional desde el crecimiento economico hacia la demanda 
+de energia electrica. Las politicas de conservacion de energia electrica tienen 
+un impacto o nulo sobre el crecimiento economico, debido a que el costo de la energia 
+es muy pequeno como proporcion del PIB y por lo tanto el consumo de energia es probable 
+que tenga un impacto poco significativo en el crecimiento economico.
+
+3. Hipotesis retroalimentacion^[*Gonzalez 2006 ; lee etal 2008; nazlioglu 2013 Osman 206 citado por Hmisu sadi ali 2020*]
+
+Establece una relacion bilateral entre el crecimiento economico y el consumo electrico
+en donde las politicas conservadoras de energia no son recomendables, al contratio, 
+se propone incentivar el desarrollo del sector electrico para impulsar el crecimiento economico
+
+4. Hipotesis de neutralidad^[*Ameyaw etal 2016 citado por el de arriba*]
+
+Afirma que no existe ninguna relacion de causalidad entre el consumo de energia 
+electrica y el crecimiento economico. En este escenario, las politicas de conservacion 
+de energia orientadas a la reduccion del consumo electrico no tendran influencia en
+el crecimiento economico .
+
+
+
+<!-- literatura sobre precios crecimiento consumo -->
+<!-- En la literatura para identificar la relacion de precios, consumo energetico y crecimiento economico -->
+<!-- tanto en paises desarrollados como en desarrollo. Se menciona a  -->
+<!-- *toman y Jenelkova 2003* sostienen que el crecimiento economico es el principal -->
+<!-- motor de la demanda de energia, y que unicamente economias avanzadas, con un alto   -->
+<!-- grado de capacidad de innovación, pueden disminuir el consumo de energia sin reducir  -->
+<!-- el crecimiento economico. -->
+
 
 
 
@@ -20,9 +59,6 @@ el crecimiento economico
 <!-- 2-3 paginas -->
 <!-- investigaciones previas que muestren la relacion de estas variables -->
 <!-- centrarse en los  resultados-->
-
-## Crecimiento economico y el consumo de energia 
-
 
 La conexión y el crecimiento económico ha sido uno 
 de los temas más sofisticados de muchos años^[Pregunta: Es necesario mencionr el metodo y el resultado de las estimaciones o es sufiente con mencional que la relacion positva o que hubo relacion causal?] y se
@@ -48,3 +84,10 @@ crecimiento economico hasta el consumo de energia. *bildirict et al. 2012* encon
 entre el consumo de energia y el PIB percapita.
 
 
+
+
+*Galindo 2014* encontro una relacion de causal entre el consumo de energia electrica
+y el crecimiento economico, no se encontro una relacion que va desde el crecimiento economico
+hacie el consumo de energia electrica. *kraft 1978* encontro evidencia de causalidad 
+unidireccional del crecimiento economico al consumo de energia (1947 - 1974). *Wolde 2006a* 
+demostro que para los paises desarrollados 

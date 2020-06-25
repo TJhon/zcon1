@@ -1,7 +1,60 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 # Introduccion 
 
 <!-- 2 - 3 paginas -->
 <!-- > Planteamiento del problema: la importancia del tema  -->
+
+
+El Producto Interno Bruto Interno (PIB) per capita, muchas veces visto como un indicador de bienestar de la poblacion es algo de lo cual casi 
+siempre se habla a la hora de hacer politica publica, orientada a la mejora de las condiciones de vida de las personas. Existen muchas teorias las cuales 
+tratan de conocer cuales son las variables que causan un crecimiento economico^[El modelo basico de crecimiento economico endogeno es de Solow], y las condiones 
+para que exista crecimiento economico sostenido concuerdan que la acumulacion de capital, la acumalacion capital humano y tecnologia son algunas de estas variables. 
+
+
+<!-- Debido a eso mantener un crecimiento sostenido es un  -->
+<!-- problema de casi todas las naciones, ya que este aseguraria acumular capital y mendiante mecanismo de transmision como la redistribucion poder reducir la pobreza,  -->
+<!-- distribucion de activos fisicos y capital humano^[Fundamento para priorizar el crecimiento economico aunque hay otros autores que mencionan que se puede tener  -->
+<!-- un desarrollo economico sin presindir de un anterior crecimiento economico]. -->
+
+Por otro lado la energia electrica es mas que un simple 
+insumo del proceso productivo, basicamente todos los procesos de la industristia presinden de este, hasta el punto en que si su demanda para una empresa es lo suficientemente alta
+hacen acuerdos donde dejan de lado las tarifas y acuerdan un precio asi como el consumo minimo requerido para que las partes esten de acuerdo con el contrato. Y como en
+en tendencia si la productivad aumenta los requerimientos de energia electrica seran mayoures para poder suplir la demanda.
+
+
+```{r, echo = FALSE, include=FALSE, warning=FALSE}
+library(here)
+library(tidyverse)
+library(readr)
+library(glue)
+theme_set(theme_minimal())
+knitr::opts_chunk$set(fig.pos = "H", # Fijar posicion de las figuras 
+                      echo = F, # si es FALSE Correr el codigo pero mostrarlo
+                      message = F, # si es FALSE Mensajes omitidos
+                      warning = F, # si es FALSE Advertencias omitidas
+                      include = T, # si es FALSE 
+                      out.extra = "", 
+                      cache = F# 
+                      ) 
+pib <- read_rds(here('rdatos', 'pib1.rds')) 
+```
+
+```{r}
+pib%>% 
+  filter(sector == 'nacional') %>% 
+  ggplot(aes(fecha, valor)) + geom_line()
+
+pib%>% 
+  filter(sector != 'nacional') %>% 
+  ggplot(aes(fecha, log(valor), color = factor(sector))) + geom_line()
+
+  periodo <- paste0(min(pib$fecha), '-', max(pib$fecha)) 
+
+```
 
 ```{r}
 fecha <- "hoy"
@@ -11,15 +64,28 @@ hoy <- "hoy"
 
 ```
 
+<!-- El objetivo de las economias es lograr un mayor bienestar para todos los individuos -->
+<!-- pertenecientes a estas, dado que el crecimiento de la actividad economica requiere -->
+<!-- mayor electricidad para las operaciones de diferentes sectores economicos. El  consumo  -->
+<!-- de electricidad es considerada una de las necesidades de la vida diaria  -->
+<!-- de ahi la relacion con el desarrollo humano que comprende sectores como la salud, -->
+<!-- poblacion, productividad agricola, educacion y produccion industrial. -->
 
-Mantener el crecimiento economico es un problema de todas las naciones,
-ya que tener un crecimiento economico es vital para poder acumular capital y asi 
-poder reducir la pobreza, seguido de una adecuadadistribucion de activos fisicos y de capital humano
 
-Es por ello de la importancia de conocer los factore que influyen en una tasa de 
-crecimiento sostenido. El consumo de energia electrica es un factor que se genera 
-por la mayor actividad de la economica como tambien condicion necesaria para que esta
-se pueda expandir.
+<!-- La energia electrica es mas que un simple insumo del proceso productivo, basicamente -->
+<!-- todos los procesos productivos existentes en la industria lo necesitan  -->
+<!-- si su demanda es lo sufientemente alta hacen contratos con las mismas empresas -->
+<!-- para acordar un precio con una  -->
+
+
+<!-- Mantener el crecimiento economico es un problema de todas las naciones, -->
+<!-- ya que tener un crecimiento economico es vital para poder acumular capital y asi  -->
+<!-- poder reducir la pobreza, seguido de una adecuadadistribucion de activos fisicos y de capital humano -->
+
+<!-- Es por ello de la importancia de conocer los factore que influyen en una tasa de  -->
+<!-- crecimiento sostenido. El consumo de energia electrica es un factor que se genera  -->
+<!-- por la mayor actividad de la economica como tambien condicion necesaria para que esta -->
+<!-- se pueda expandir. -->
 
 El Producto Interno Bruto (PIB) de la nacion en `r fecha` asciende a `r dato` a precios 
 constantes del `r cosnstante`, disminuyo en los ultimos meses a causa de 
@@ -36,7 +102,17 @@ periodo <- 12
 ```
 
 Asi mismo el Producto Interno por habitante (PIB per capita) 
-que muestra el nivel de riqueza o binestar en niveles monetarios en un 
-momento determinado, sigue el mismo que el PIB
-comportamiento, la tasa de crecimiento se encuentra al rededor de `r crecimiento`%
-en el periodo `r periodo`, con tendencia a la baja.
+que muestra el nivel de riqueza o binestar en niveles monetarios en un  momento determinado, sigue el mismo que el PIB comportamiento, la tasa de crecimiento se encuentra al rededor de `r crecimiento`% en el periodo `r periodo`, con tendencia a la baja. 
+
+```{r}
+consumo <- read_rds(here('rdatos', 'con1.rds'))
+consumo %>%  
+  ggplot(aes(fecha, valor)) + geom_line()
+```
+
+En constraste la demanda de energia tiene un comportamiento similar se ve una caida en el consumo de energia en los ultimos meses 
+con un decrecimiento del consumo de `# r decrece` antes del febrero del 2020 tenia una tendencia positiva.
+Los sectores los cuales mayor demanda tienen son la mineria y la industria, los cuales la mayoria de sus consumidores son "clientes libres"^[Clientes que tiene un consumo superior a 2.5 Kwh] los cuales pueden acordar el precio al cual comprar la energia electrica. 
+Actualemente las hidroelectricas son las principales proveedoras de energia electrica.
+
+

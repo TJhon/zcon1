@@ -5,3 +5,33 @@
 <!-- senaliar el metodo que se va a utilizar: metodo? inductivo deductivo? -->
 <!-- explicar las variables: como se trataron los datos, indicadores fuente -->
 <!-- Definir si son datos reales o datos nominales -->
+
+```{r medodo}
+# minicio <- min(anios)
+# mfin <- max(anios)
+# mobs <- nrow(anios)
+```
+
+## Especificacion del modelo 
+
+## Definicion de variables 
+
+La serie de tiempo empleadas estan conformadas por datos mensuales, iniciando en 
+el anio `r minicio` hasta el anio `r mfin` con un total de `r mobs` observaciones.
+Todas las variables estan expresadas en logaritmos naturales.
+
+1. Consumo de Energia Electrica 
+    Consumo de Energia Electrica de un determinado territorio
+    en un espacio temporal
+    - Fuente: Coes
+2. Crecimiento Economico 
+    Incremento porcentual del Producto Interno Bruto real dividido entre la cantidad
+    de habitantes de una economia en un periodo determinado
+    - Fuente: BCRP
+3. Indice de precios al consumidor 
+    Indice que mide el promedio de los precios que pagan los consumidores por una 
+    canasta basica de bienes y servicios
+    - Fuente: INEI
+4. Tarifa
+    Precio que establece la autoridad publica para los servicios publicos
+    - Fuente: BCRP
