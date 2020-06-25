@@ -2,10 +2,11 @@
 title: "Crecimiento economico y consumo de energia"
 author: 'yo'
 output:
-  word_document: default
-  html_document: default
+  #word_document: default
+  #html_document: default
   pdf_document: default
 lang: es
+bibliography: bib/ref1.bib
 ---
 
 
