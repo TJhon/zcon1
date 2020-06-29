@@ -32,7 +32,7 @@ library(tidyverse)
 library(readr)
 library(glue)
 theme_set(theme_minimal())
-knitr::opts_chunk$set(fig.pos = "H", # Fijar posicion de las figuras 
+knitr::opts_chunk$set(fig.pos = "h", # Fijar posicion de las figuras 
                       echo = F, # si es FALSE Correr el codigo pero mostrarlo
                       message = F, # si es FALSE Mensajes omitidos
                       warning = F, # si es FALSE Advertencias omitidas
@@ -41,9 +41,10 @@ knitr::opts_chunk$set(fig.pos = "H", # Fijar posicion de las figuras
                       cache = F# 
                       ) 
 pib <- read_rds(here('rdatos', 'pib1.rds')) 
+consumo <- read_rds(here('rdatos', 'con1.rds'))
 ```
 
-```{r}
+```{r, fig.dim=c(5, 3), fig.cap='Datos', fig.subcap=c('PIB nacional', 'PIB sectorial', 'Consumo electrico'), out.width='50%', fig.ncol=2, fig.align='center'}
 pib%>% 
   filter(sector == 'nacional') %>% 
   ggplot(aes(fecha, valor)) + geom_line()
@@ -53,8 +54,10 @@ pib%>%
   ggplot(aes(fecha, log(valor), color = factor(sector))) + geom_line()
 
   periodo <- paste0(min(pib$fecha), '-', max(pib$fecha)) 
-
+consumo %>%  
+  ggplot(aes(fecha, valor)) + geom_line()
 ```
+
 
 ```{r}
 fecha <- "hoy"
@@ -104,15 +107,15 @@ periodo <- 12
 Asi mismo el Producto Interno por habitante (PIB per capita) 
 que muestra el nivel de riqueza o binestar en niveles monetarios en un  momento determinado, sigue el mismo que el PIB comportamiento, la tasa de crecimiento se encuentra al rededor de `r crecimiento`% en el periodo `r periodo`, con tendencia a la baja. 
 
-```{r}
-consumo <- read_rds(here('rdatos', 'con1.rds'))
-consumo %>%  
-  ggplot(aes(fecha, valor)) + geom_line()
-```
 
 En constraste la demanda de energia tiene un comportamiento similar se ve una caida en el consumo de energia en los ultimos meses 
 con un decrecimiento del consumo de `# r decrece` antes del febrero del 2020 tenia una tendencia positiva.
-Los sectores los cuales mayor demanda tienen son la mineria y la industria, los cuales la mayoria de sus consumidores son "clientes libres"^[Clientes que tiene un consumo superior a 2.5 Kwh] los cuales pueden acordar el precio al cual comprar la energia electrica. 
+Los sectores los cuales mayor demanda tienen son la mineria y la industria, los cuales la mayoria de sus consumidores son "usuarios libres"^[Clientes que tiene un consumo superior a 2.5 Kwh] los cuales pueden acordar el precio al cual comprar la energia electrica. 
 Actualemente las hidroelectricas son las principales proveedoras de energia electrica.
+
+## Importancia de la investigacion 
+
+Actualmente las investigaciones en el peru respecto a la relacion crecimiento economico y consumo de electricidad son escazos, por lo que aun no se sabe empiricamente el mecanismo  de trasmision del tema. Por loque el desarrollo de la investigacion tratara de cubrir ese vacio en literatura para que pueda servir tanto para la aplicacion de politica publica o optimizacion eficiente de los recursos energeticos. 
+
 
 
