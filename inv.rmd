@@ -1,10 +1,10 @@
 ---
-title: "Crecimiento economico y consumo de energia"
+title: "Crecimiento economico y consumo electrico "
 author: 'yo'
 output:
+  pdf_document:
+    extra_dependencies: "subfig"
   #word_document: default
-  #html_document: default
-  pdf_document: default
 lang: es
 bibliography: bib/ref1.bib
 ---
@@ -18,9 +18,10 @@ bibliography: bib/ref1.bib
 # libreris necesarias 
 ```
 
-# Caratula 
+
 
 ```{r resumen, child = 'rmd/01resumen.rmd'}
+```
 
 ```{r introduccion, child = 'rmd/02intro.rmd'}
 ```
@@ -37,7 +38,7 @@ bibliography: bib/ref1.bib
 ```{r hipotesis, child = 'rmd/07hipo.rmd'}
 ```
 
-```{r metodologia, child = 'rmd/08metod.rmd'}
+```{r metodologia, child = 'rmd/08method.rmd'}
 ```
 
 ```{r resultados, child = 'rmd/09resul.rmd'}

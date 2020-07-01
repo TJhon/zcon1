@@ -1,7 +1,76 @@
-# Hechoso stilizados 
+# Hechos estilizados 
 <!-- 2 paginas -->
 <!-- A mi entender es estadistica descriptiva  -->
 <!-- En base a papers del bcrp -->
 <!-- cuadros estadisticos -->
 <!-- graficos: barras, lineales, histogramas, puntos - scatter_plot -->
 <!-- caracteristicas relevantes de las variables -->
+
+```{r}
+datos <- read_rds(here('rdatos', '00datos.rmd'))
+library(kableExtra)
+library(e1071)   
+library(ggfortify)
+library(ggplottimeseries)
+library(GGally)
+```
+
+## Descripcion de las variables 
+
+```{r}
+names(datos)
+datos %>% drop_na() %>% 
+  filter(sector %in% c('nacional', 'mineria'), 
+         sector1 == 'industrial') %>% 
+  select(-fecha, -pob, -sector,  -sector1) %>% 
+  gather('variable', 'valor' ) %>% 
+  group_by(variable) %>% 
+  summarise(mean = mean(valor), 
+            N = n(), 
+            SD = sd(log(valor)),
+            Min = min(valor),
+            Max = max(valor), 
+            skewness = skewness(valor),
+            kurtosis = kurtosis(valor),
+            total = sum(valor)
+            ) # %>% kable()
+```
+
+```{r}
+
+datos %>%  
+  filter(sector == 'nacional') %>% 
+  select(-sector, -sector1, -pob) %>%
+  ggplot(aes(fecha)) +
+  geom_line(aes(y = log(pib))) +
+  geom_line(aes(y = log(consumo))) 
+  
+```
+
+
+```{r}
+datos %>% 
+  filter(sector %in% c('nacional')) %>% 
+  select(-fecha, -sector, -sector1) %>% 
+  ggpairs()
+```
+
+
+
+```{r}
+datos %>% 
+  #filter(sector == 'nacional') %>% 
+  ggplot(aes(sample = log(pib), color = sector)) + 
+  stat_qq() + stat_qq_line() +
+  facet_wrap(~sector, ncol = 2)
+```
+
+
+```{r}
+datos %>% 
+  #filter(sector == 'nacional', sector1 == 'industrial') %>% 
+  ggplot(aes(sample = consumo)) + 
+  stat_qq() + stat_qq_line()
+
+```
+
