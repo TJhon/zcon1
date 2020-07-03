@@ -23,9 +23,12 @@ expresado normalmente como la tasa de crecimiento de la productividad de los sec
 dando como consecuencia el incremento de los ingresos, ademas de un incremento en la demanda de la electricidad" 
 
 
-    ![alt](https://link de la figura presente )
+```{r <chunk-label>, echo = FALSE, fig.cap = 'FigureCaption'}
+# knitr::include_graphics('grafico del pib nacional y sectorial')
+```
 
-En tanto *Keen1029* basandose en *Kummel2010* establece una funcion de produccion modificada con energia, la cual llama Energy-Augmented Cobb-Douglas Production Function (EACDPF)
+
+En tanto *Keen2019* basandose en *Kummel2010* establece una funcion de produccion modificada con energia, la cual llama Energy-Augmented Cobb-Douglas Production Function (EACDPF)
 
 $Q = A K^\alpha L^\beta E^\chi$
 
@@ -38,7 +41,7 @@ ya que esto elimina cualquier funcion de la energia en la produccion. Si por eje
 en un 50% de la energia(mientras que se mantienen K y L constantes) causaria solo un aumento del 2.8% en la produccion, por lo que caidas extremas 
 en la energia tendria efectos triviales en la produccion.
 
-Autores  como *Payne 2020 y Ozturk2010* abordan esta relacion potencial entre el Consumo de Energia y Crecimiento Economico, mencionanando 4 hipotesis, 
+Autores  como *Payne 2010 y Ozturk2010* abordan esta relacion potencial entre el Consumo de Energia y Crecimiento Economico, mencionanando 4 hipotesis, 
 y recopilan los trabajos empiricos preexistentes que apoyan estas hipotesis.
 
 1. Hipotesis crecimiento  

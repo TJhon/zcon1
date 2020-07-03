@@ -5,72 +5,139 @@
 <!-- cuadros estadisticos -->
 <!-- graficos: barras, lineales, histogramas, puntos - scatter_plot -->
 <!-- caracteristicas relevantes de las variables -->
-
+<!-- solo datos, nada de interpretacion economica, va lo mismo para los graficos solo datos  -->
 ```{r}
-datos <- read_rds(here('rdatos', '00datos.rmd'))
+library(here)
+library(tidyverse)
 library(kableExtra)
 library(e1071)   
 library(ggfortify)
 library(ggplottimeseries)
 library(GGally)
+library(tsibble)
+library(lubridate)
+datos <- read_rds(here('rdatos', '00datos.rmd'))
 ```
 
-## Descripcion de las variables 
+A continucion se muestra los hechos resaltantes de las variables relevantes en la investigacion.
 
-```{r}
-names(datos)
-datos %>% drop_na() %>% 
-  filter(sector %in% c('nacional', 'mineria'), 
-         sector1 == 'industrial') %>% 
-  select(-fecha, -pob, -sector,  -sector1) %>% 
-  gather('variable', 'valor' ) %>% 
-  group_by(variable) %>% 
-  summarise(mean = mean(valor), 
-            N = n(), 
-            SD = sd(log(valor)),
-            Min = min(valor),
-            Max = max(valor), 
-            skewness = skewness(valor),
-            kurtosis = kurtosis(valor),
-            total = sum(valor)
-            ) # %>% kable()
+## Evolucion del PIB 
+
+En la figura *\ref figura* se muestra el comportamiento temporal del PIB nacional mensual^[Ver anexos las desestacionalizacion de las varibles] a precios constantes del 2012, asi mismo la evolucion de algunos sectores productivos los cuales presinden del consumo electrico en sus actividades productivas. En la *subfigura* se muestra que en ambas figuras tienen un comportamiento ascendente, ademas de tener un comportamiento estacional por meses. Hasta que en marzo del 2020, tuviese una caida dramatica en el nivel de actividad economica, esto causado por la suspencion de las actividades economicas no indispensables, asi como el traslado de personas a nivel nacional e internacional. 
+La tasa de crecimiento (para datos desestacionalizados) hasta el 2020 tenia valores positivos para casi todos los sectores y tienen una fuerte caida para inicios del 2020.
+
+```{r, fig.dim=c(5, 3), fig.cap='Comportamiento Temporal de las variables', fig.subcap=c('PIB nacional', 'PIB sectorial', 'Variaciones anuales'), out.width='50%', fig.ncol=2, fig.align='center'}
+datos %>% 
+ filter(sector == 'nacional') %>% 
+ ggplot(aes(fecha, pib)) + geom_line()
+
+datos %>% 
+ filter(sector != 'nacional') %>% 
+ ggplot(aes(fecha, log(pib), color = factor(sector))) + geom_line(size = 0.8)
+datos %>%
+  mutate(fecha = year(fecha)) %>% 
+  group_by(sector, fecha) %>% 
+  summarise(pib = mean(pib)) %>% 
+  mutate(diff = pib - lag(pib),  
+    t_crecimiento = (diff / pib)*100)  %>% drop_na() %>% 
+  ggplot(aes(fecha, t_crecimiento, color = sector)) + geom_line() + geom_hline(yintercept = 0)
+
 ```
 
 ```{r}
+h1 <- datos %>%# filter(sector != 'construccion') %>% 
+  group_by(sector, fecha) %>% 
+  #group_by(fecha) %>% 
+  mutate(fecha = year(fecha)) %>% 
+  summarise(pib = mean(pib)) %>% 
+  mutate(diff = pib - lag(pib),  
+    t_crecimiento = (diff / pib)*100)  %>% drop_na() %>% 
+   mutate(diff = pib - lag(pib),  
+    t_crecimiento = (diff / pib)*100,
+         int = ifelse(fecha >= 2007 & fecha <= 2011, '2007-2011',
+                      ifelse(fecha > 2011 & fecha <= 2015, '2012-2015',
+                             ifelse(fecha > 2015 & fecha < 2020, '2015-2019', '2020.1 - 2020.4')))) %>% 
+  group_by(sector, int) %>% 
+  summarise(promedio = mean(t_crecimiento, na.rm = T)) %>% 
+  spread(int, promedio) %>% 
+  arrange(5)
 
+
+h1 %>% kable()
+```
+
+A el PIB nacional en periodo 2007 - 2011 tuvo un crecimiento promedio de 4.90%, periodo 2012-2015 un crecimiento del 4.1%, en 
+el periodo 2015-2019  de un 3.05%,  pero para los datos disponibles del 2020 se nota un decrecimiento de la economia, de un 21%.
+Mientras que para otros sectores productivos tiene casi el mismo comportamiento, 
+el promedio de las tasas de  crecimiento de los sectores en el periodo temporal 2007 - 2020.4, 
+como se puede observar, los sectores que mas crecieron en el periodo `r names(h1)[2]` fueron los sectores de construccion y los otros servicios, el cual tiene incluido al las prestaciones de servicios financieros, para el periodo `r names(h1)[3]` en promedio el sector construccion cayo a casi la mitad de su crecimiento del anterior periodo mencionado, por otra parte la tasa de crecimiento de sector "Otros servicios" tenia tendencia a la baja, hasta el siguiente periodo `r names(h1)[4]` el cual casi todos los sectores en promedio solo fue de 3.5%, por ultimo desde inicios del 2020 se registro caidas abruptas en los sectores de construcion (`r h1[1,5]` %), manufactura (`r h1[2,5]` %) y mineria(`r h1[3,5]` %).
+
+
+## Consumo electrico
+
+Al igual que el PIB, tiene un comportamiento tendencial, y tambien tiene estacionalidad por periodos, 
+
+```{r, out.width='50%'}
 datos %>%  
-  filter(sector == 'nacional') %>% 
-  select(-sector, -sector1, -pob) %>%
-  ggplot(aes(fecha)) +
-  geom_line(aes(y = log(pib))) +
-  geom_line(aes(y = log(consumo))) 
-  
+  mutate(f = year(fecha)) %>% 
+  filter(f >= 2007) %>%
+  ggplot(aes(fecha, consumo)) + geom_line()
+```
+
+Por su parte la tasa de crecimiento del consumo electrico para datos desestacionalizados esta presente en la tabla *siguiente*, donde en promedio en el periodo del 2007 al 2011 su crecimiento fue de 7.4%, en los posteriores anios se nota una descendencia de la tasa de crecimiento a 5.6% para los anios 2012-2015, y otra descencia a 4.3% para el periodo 2015-2019, y hasta marzo del 2020 se nota una drastica caida de la tasa a -12% en el consumo electrico, esta ultima a causa de la crisis sanitaria.
+
+```{r}
+h1 <- datos %>%
+  mutate(f = year(fecha)) %>% 
+  group_by(f) %>%
+  filter(f >= 2006) %>%
+  summarise(consumo = mean(consumo)) %>% 
+  mutate(d = consumo - lag(consumo),  
+    t_crecimiento = (d / consumo)*100,
+    nt = ifelse(f >= 2007 & f <= 2011, '2007-2011',
+                      ifelse(f > 2011 & f <= 2015, '2012-2015',
+                             ifelse(f > 2015 & f < 2020, '2015-2019', '2020.1 - 2020.4'))) )  %>% drop_na() %>% 
+  group_by(nt) %>% 
+  summarise(promedio = mean(t_crecimiento, na.rm = T)) %>% 
+  spread(nt, promedio) %>% 
+  mutate(variable = 'Crecimiento % del consumo') %>% 
+  select(variable, everything())
+
+
+h1 %>% kable()
+```
+
+
+
+## Indice de precios al consumidor
+
+Por su parte el indice de precios al consumidor del precio del Gas de 84 octanos, en anio base del 2020 tiene un comportamiento ascendente con 
+un posible quiebre en enero de 2015, y al parecer no tiene un aparente comportamiento estacional
+
+
+```{r, out.width='50%'}
+datos %>% filter(sector1 == 'gas84') %>% 
+  ggplot(aes(fecha, ipc)) + geom_line()
 ```
 
 
 ```{r}
-datos %>% 
-  filter(sector %in% c('nacional')) %>% 
-  select(-fecha, -sector, -sector1) %>% 
-  ggpairs()
+h1 <- datos %>%
+  mutate(f = year(fecha)) %>% 
+  group_by(f) %>%
+  filter(f >= 2006) %>%
+  summarise(ipc = mean(ipc)) %>% 
+  mutate(d = ipc - lag(ipc),  
+    t_crecimiento = (d / ipc)*100,
+    nt = ifelse(f >= 2007 & f <= 2011, '2007-2011',
+                      ifelse(f > 2011 & f <= 2015, '2012-2015',
+                             ifelse(f > 2015 & f < 2020, '2015-2019', '2020.1 - 2020.4'))) )  %>% drop_na() %>% 
+  group_by(nt) %>% 
+  summarise(promedio = mean(t_crecimiento, na.rm = T)) %>% 
+  spread(nt, promedio) %>% 
+  mutate(variable = 'Crecimiento % del IPC') 
+
+h1 %>% kable()
 ```
 
-
-
-```{r}
-datos %>% 
-  #filter(sector == 'nacional') %>% 
-  ggplot(aes(sample = log(pib), color = sector)) + 
-  stat_qq() + stat_qq_line() +
-  facet_wrap(~sector, ncol = 2)
-```
-
-
-```{r}
-datos %>% 
-  #filter(sector == 'nacional', sector1 == 'industrial') %>% 
-  ggplot(aes(sample = consumo)) + 
-  stat_qq() + stat_qq_line()
-
-```
-
+ La tabla muestra un crecimiento promedio, del 1.4% en todo el espacio temporal, en el periodo 2007-2011 fue de 0.9%, mientras que para el periodo 2012-2015 tiene un crecimiento del 2.7%, y para lalas ultimas fechas observadas fue de 2.3%.

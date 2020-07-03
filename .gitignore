@@ -16,3 +16,4 @@ datos/rds
 *.csv
 bib/pdf
 *.txt
+*.log

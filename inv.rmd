@@ -1,10 +1,12 @@
 ---
-title: "Crecimiento economico y consumo electrico "
-author: 'yo'
+title: 'Crecimiento economico y consumo electrico '
+author: "yo"
 output:
   pdf_document:
-    extra_dependencies: "subfig"
-  #word_document: default
+    extra_dependencies: subfig
+  html_document:
+    df_print: paged
+  word_document: default
 lang: es
 bibliography: bib/ref1.bib
 ---

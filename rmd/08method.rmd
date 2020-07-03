@@ -1,3 +1,10 @@
+---
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
 # Metodologia 
 
 <!-- 2 - 3 paginas -->
@@ -7,31 +14,130 @@
 <!-- Definir si son datos reales o datos nominales -->
 
 ```{r medodo}
+# anios <- datos %$% anios %>% year()
 # minicio <- min(anios)
 # mfin <- max(anios)
 # mobs <- nrow(anios)
 ```
 
-## Especificacion del modelo 
+
+## Metodo 
+
+La investigacion es de tipo explicativo, ya que se busca saber las causas de los hechos. Su objetivo es focalizarse y justificar por que sucede un hechos, bajo que condiciones se manifiesta, como ha venido evolucionado, y la relacion que podria existir entre ellas. Em metodo universal es el funcionalista, ya que se planetea que cada de las partes cumple un papel en la funcion y forma parte del todo. En tanto al metodo general se identifica que es deductivo ya que a partir de enunciados principios generales señalados en el marco teórico se deduce una hipótesis que postula una relación de tipo causal. y por ultimo el metodo particular es el empirico-estadistico en particular el uso un modelo VAR para la constrastacion de hipotesis.
+
+
+## Recoleccion de datos 
+
+Datos mensuales desde enero del 2010 hasta diciembre del 2019, el Producto interno Bruto es extraido de la base de datos
+del Banco de reserva del Peru(BCRP) en miles de millones de soles, el consumo electrico con datos cada 30 min del Comité de Operación Económica del Sistema Interconectado Nacional(COES)en MWh, el indice de precios al consumidor obtenidos
+del Instituto Nacional de Estadistica e Informatica de Peru, con un total de 120 observaciones. Para que los datos coincidan se modifico la base de datos 
+original para que el Producto Bruto Interno este a precios del 2012, el consumo electrico es la suma del consumo de agregado de todo el mes, y por ultimo 
+el indice de precios al consumidor estan a precios base del anio 2012.
+
 
 ## Definicion de variables 
 
 La serie de tiempo empleadas estan conformadas por datos mensuales, iniciando en 
-el anio `r minicio` hasta el anio `r mfin` con un total de `r mobs` observaciones.
+el anio `#r minicio` hasta el anio `#r mfin` con un total de `#r mobs` observaciones.
 Todas las variables estan expresadas en logaritmos naturales.
 
-1. Consumo de Energia Electrica 
+1. Consumo electrico percapita
     Consumo de Energia Electrica de un determinado territorio
-    en un espacio temporal
+    en un espacio temporal()
     - Fuente: Coes
+    - Ecuacion: $C_p = \frac{\text{Consumo electrico} }{poblacion}$
 2. Crecimiento Economico 
     Incremento porcentual del Producto Interno Bruto real dividido entre la cantidad
     de habitantes de una economia en un periodo determinado
     - Fuente: BCRP
+    - Ecuacion: $CE = \Delta \% \text{PIB per capita}$
 3. Indice de precios al consumidor 
     Indice que mide el promedio de los precios que pagan los consumidores por una 
     canasta basica de bienes y servicios
     - Fuente: INEI
-4. Tarifa
-    Precio que establece la autoridad publica para los servicios publicos
-    - Fuente: BCRP
+
+
+## Modelo econometrico 
+
+A continuacion se detalla el modelo a constrastar con las variables la cual ya se detallo anteriormente 
+
+$ln(y_t) = \beta_0 + \beta_1 ln(CEl_t) +  \beta_2 (P)$
+
+Donde:
+
+- $ln$: es el logaritmo natural
+- $y$: es el PIB percapita
+- $CEl$: es elconsumo electrico percapita
+- $P$: es el precio
+- $t$: es el tiempo
+
+
+
+
+## Metodologia econometrica 
+
+### Vectores autoregresivos (VAR)
+
+La metodología econométrica de vectores autorregresivos (VAR) planteada
+por Sims (1980). Trata a las variables de manera independiente, variables que se
+explican por si mismas en función de sus rezagos, considerados como modelos
+econométricos ateóricos que permite ver la causalidad de las variables y el efecto
+que tiene una variable ante otra variable mediante un shock o innovación de los
+errores, llamadas función de impulso respuesta, que muestra la temporalidad de
+duración del choque sobre la variable de estudio.
+
+Su planteamiento formal es relativamente sencillo, en la parte derecha de la
+función va la variables endógenas rezagadas donde la cantidad de rezagos
+apropiados determinaran la aleatoriedad de los residuos, y en la parte derecha las
+variables endógenas.
+
+Cuando un modelo presenta variables independientes y dependientes en la parte derecha, entonces se considera modelos simultáneos sujeto a parámetros muchas veces subjetivos, de ahí nace la necesidad de modelos de ecuaciones simultáneas no condicionadas, conocido como modelos de vectores autorregresivos VAR, en este caso en particular es de la siguiente manera:
+
+$$
+y_t = \beta^{y}_0 + \beta^{y}_1y_{t-1} + \beta^{CEl}_3y_{t-1} + \nu_{y,t} 
+$$
+$$
+  P_t = \beta^{P}_0 + \beta^{P}_1P_{t-1} + \beta^{CEl}_3P_{t-1} + \nu_{P,t} 
+$$
+
+
+$$
+CEl_t = \beta^{CEl}_0 + \beta^{y}_1CEl_{t-1} + \beta^{y}_3y_{t-1} + \nu_{CEl,t} 
+$$
+donde los terminos de error satisfacen, 
+
+$$
+E(\nu_{CEl,t}) = E(\nu_{y, t}) = E(\nu_{p, t}) = 0
+$$
+
+$$
+E(\nu_{Cel,t} \nu_{CEl, s} ) = E(\nu_{y,t} \nu_{y, s}) = E(\nu_{p,t} \nu_{p, s}) = 0, t\neq s
+$$
+
+
+Las ecuaciones constituyen un modelo de vectores autoregresivos de primer orden  VAR(1) dado que se considera solamente un rezago en las variables entre las cuales puede exister una retroalimentacion.
+
+
+### Caracteristicas del modelo VAR
+
+No se considera apriori variables endogenas y/o exogenas, no require de conocimientos teoricos fuertes sobre las fueras que influyen en las variables para la elaboracion del modelo VAR, si no se excluyen las vairables y ninguna se supone exogena entonces todas las variables de estudio causan a todas, por lo que estan relacionas temporalmente operando en rezagos en la economia.
+
+
+## Test de causalidad de Granger
+
+El test causalidad a lo Granger, aprobara la hipotesis de que esta variable es significatica para el modelo y por consecuencia que en una variable casual.
+
+
+### Funcion de impulso respuesta
+
+
+Esta función recoge la respuesta de la variable dependiente ante un golpe o
+shock que es generalmente el valor de una desviación típica de la variable
+independiente, este efecto formalmente introduce una alteración en la perturbación
+aleatoria alterando el conjunto del sistema, estos efectos podrían ser estables o
+explosivos dependiendo de la naturaleza de su interrelacion.
+
+<!--al menos trata sobre lo que quiero  http://repositorio.uncp.edu.pe/bitstream/handle/UNCP/5131/T010_44239216_T.pdf?sequence=1&isAllowed=y -->
+<!-- test de autocorrelacion -->
+
+

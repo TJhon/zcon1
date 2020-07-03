@@ -1,4 +1,14 @@
 # Hipotesis 
 
 <!-- 1 pagina -->
-<!-- Respuesta anticipada: comportamiento de las variables -->
+<!-- Respuesta anticipada: comportamiento de las variables --> 
+
+## Hipotesis general 
+
+- El efecto del consumo electrico, y el indice de precios al consumidor de la electricidad en el crecimiento economico fue positivo y negativo respectivamente,
+
+## Hipotesis especificas
+
+- El efecto del consumo electrico en el crecimiento economico fue positivo.
+
+- El efecto del indice de precios al consumidor de la electricidad fue negativo.
