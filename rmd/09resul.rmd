@@ -82,7 +82,7 @@ tibble(
 
 
 ## Estimaciones 
-
+<!--
 ### Minimos cuadrados ordinarios
 
 ```{r, results='asis'}
@@ -91,6 +91,8 @@ m1 <-  lm(tcpbi ~ comsumo + ipc, data = data)
 
 m1 %>% stargazer::stargazer(column.labels = c('MCO') )
 ```
+-->
+
 ### VAR
 
 ```{r, result = 'asis'}
