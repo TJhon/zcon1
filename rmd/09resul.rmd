@@ -59,11 +59,15 @@ library(urca)
 library(tseries)
 d <- diff(data$comsumo)
 d2 <- diff(data$ipc)
-plot(d2)
 df1 <- adf.test(d, k = 0)
 df2 <- adf.test(data1$tcpbi, k = 1)
 df3 <- adf.test(d2, k = 1)
+```
 
+## Raiz unitaria 
+
+
+```{r}
 tibble(
   lags = c(0,1, 1),
   raiz = c(df1$statistic, df2$statistic, df3$statistic)
@@ -85,7 +89,7 @@ tibble(
 data %>% names 
 m1 <-  lm(tcpbi ~ comsumo + ipc, data = data)
 
-m1 %>% stargazer::stargazer()
+m1 %>% stargazer::stargazer(column.labels = c('MCO') )
 ```
 ### VAR
 
@@ -108,7 +112,7 @@ m1 <- VAR(data, p = 2, type = 'const', season = NULL)
  & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
 \cline{2-4} 
 \\[-1.8ex] & \multicolumn{3}{c}{y} \\ 
-\\[-1.8ex] & (1) & (2) & (3)\\ 
+\\[-1.8ex] & (consumo) & (ipc) & (tcpbi)\\ 
 \hline \\[-1.8ex] 
  comsumo.l1 & 0.608$^{***}$ & 0.007 & $-$0.001 \\ 
   & (0.104) & (0.007) & (0.005) \\ 
@@ -167,7 +171,8 @@ causality(m1, cause = 'comsumo')$Granger
 Este otro resultado menciona que hay relacion causal que va desde el consumo electrico haci el crecimiento economico y los precios.
 
 
-<!---### Impulso respuesta
+<!---
+### Impulso respuesta
 
 ```{r}
 
@@ -175,5 +180,5 @@ Este otro resultado menciona que hay relacion causal que va desde el consumo ele
 irf(m1, impulse = 'tcpbi', response = 'comsumo', n.ahead = 20, boot =T) %>% plot
 irf(m1, impulse = 'comsumo', response = 'tcpbi', n.ahead = 20, boot =T) %>% plot
 ```
-
 -->
+

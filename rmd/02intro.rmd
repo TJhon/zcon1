@@ -17,9 +17,16 @@ knitr::opts_chunk$set(fig.pos = "h", # Fijar posicion de las figuras
                       warning = F, # si es FALSE Advertencias omitidas
                       include = T, # si es FALSE 
                       out.extra = "", 
-                      cache = F# 
+                      cache = F,# 
+                      fig.align='center'
                       ) 
 
+options(knitr.duplicate.label = "allow", # permitir Chunk names repetidos
+        knitr.table.format = function() { # funcione de acuerdo a la salida del texto
+  if (knitr::is_latex_output()) 'latex' else 'pandoc'
+}, digits = 2, 
+kableExtra.auto_format = FALSE
+)
 datos <- read_rds(here('rdatos', '00datos.rds'))
 ```
 
@@ -37,14 +44,14 @@ se manifiesta con empresas publicas y regulaciones a las actividades de las empr
 En el Peru el enfoque en la generacion electrica es via mercados competitivos, y para fomentar la inversion privada en la infraestructura, se debe desarrollar una regulacion
 que promueva la eficiencia economica en los sectores sujetos a condiciones de monopolio natural ^[En el sector electrico destacan la transmision y distribucion electrica las cuales estan sujetas a tarifas electricas eficientes, 
 por otro lado la comercializacion electrica en otros paises esta en base a la competencia 
-en el Peru la distribuidora aume ese papel tambien.], asi cmo la supervicion del cumplimiento de las normas de seguridad aplicables al sector, lo anterior en el Peru esta a cargo del Organismo Supervisor de la Inversión en Energía y Minería (Osinermin)
+en el Peru la distribuidora aume ese papel tambien.], asi cmo la supervicion del cumplimiento de las normas de seguridad aplicables al sector, lo anterior en el Peru esta a cargo del Organismo Supervisor de la Inversión en Energía y Minería (Osinergmin)
 el cual cuenta con autonomia gubernamental. 
 
 En los ultimos anios se observo un importante desarrollo del sector electico en el Peru, en promedio, tuvo un crecimiento de alrededor del 8% anual, sosteniendo el crecimiento de la actividad economica, 
-la cual alcanzo tasas de crecimiento `# r crecimiento` %. Por otro lado tambien se observo una disminucion de la pobreza energetiva y el mayor acceso de la poblacion a los servicios energeticos se volvieron prioridad de 
+la cual alcanzo tasas de crecimiento 4%. Por otro lado tambien se observo una disminucion de la pobreza energetiva y el mayor acceso de la poblacion a los servicios energeticos se volvieron prioridad de 
 politica publica. Para resaltar, la cobertura eléctrica nacional pasó de 69.8% en 2001 a
 92.0% en 2014 y, en la zonas rurales, de 24.4% a 75.2%, estas politicas de energia aun siguen vigentes, ademas un Decreto legisltaivo que mejora la Regulación de la Distribución de Electricidad para promover un
-mayor grado de acceso y uso de la energía eléctrica en el Perú con altos estándares de calidad e innovación *Osinergmin 2012*. 
+mayor grado de acceso y uso de la energía eléctrica en el Perú con altos estándares de calidad e innovación  @Osinergmin2017. 
 
 Los principales demandantes de grandes cantidades de energia son la mineria y la industria, las cuales por las caracteristica economicas 
 necesitan electricidad en casi todas las etapas de su actividad economica, con su alta demanda electrica ya no estan sujetas a las regulaciones de precios en este caso 

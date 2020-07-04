@@ -23,10 +23,10 @@ A continucion se muestra los hechos resaltantes de las variables relevantes en l
 
 ## Evolucion del PIB 
 
-En la figura *\ref figura* se muestra el comportamiento temporal del PIB nacional mensual^[Ver anexos las desestacionalizacion de las varibles] a precios constantes del 2012, asi mismo la evolucion de algunos sectores productivos los cuales presinden del consumo electrico en sus actividades productivas. En la *subfigura* se muestra que en ambas figuras tienen un comportamiento ascendente, ademas de tener un comportamiento estacional por meses. Hasta que en marzo del 2020, tuviese una caida dramatica en el nivel de actividad economica, esto causado por la suspencion de las actividades economicas no indispensables, asi como el traslado de personas a nivel nacional e internacional. 
+En la figura \@ref(fig:pib-fig) se muestra el comportamiento temporal del PIB nacional mensual^[Ver anexos las desestacionalizacion de las varibles] a precios constantes del 2012, asi mismo la evolucion de algunos sectores productivos los cuales presinden del consumo electrico en sus actividades productivas. En las subfiguras se muestran que en ambas figuras tienen un comportamiento ascendente, ademas de tener un comportamiento estacional por meses. Hasta que en marzo del 2020, tuviese una caida dramatica en el nivel de actividad economica, esto causado por la suspencion de las actividades economicas no indispensables, asi como el traslado de personas a nivel nacional e internacional. 
 La tasa de crecimiento (para datos desestacionalizados) hasta el 2020 tenia valores positivos para casi todos los sectores y tienen una fuerte caida para inicios del 2020.
 
-```{r, fig.dim=c(5, 3), fig.cap='Comportamiento Temporal de las variables', fig.subcap=c('PIB nacional', 'PIB sectorial', 'Variaciones anuales'), out.width='50%', fig.ncol=2, fig.align='center'}
+```{r pib-fig, fig.dim=c(5, 3), fig.cap='Comportamiento Temporal de las variables', fig.subcap=c('PIB nacional', 'PIB sectorial', 'Variaciones anuales'), out.width='50%', fig.ncol=2, fig.align='center'}
 datos %>% 
  filter(sector == 'nacional') %>% 
  ggplot(aes(fecha, pib)) + geom_line()
@@ -77,7 +77,7 @@ como se puede observar, los sectores que mas crecieron en el periodo `r names(h1
 
 Al igual que el PIB, tiene un comportamiento tendencial, y tambien tiene estacionalidad por periodos, 
 
-```{r, out.width='50%'}
+```{r, fig.cap='Comportamiento Temporal del consumo electrico', out.width='50%'}
 datos %>%  
   mutate(f = year(fecha)) %>% 
   filter(f >= 2007) %>%
@@ -101,7 +101,7 @@ h1 <- datos %>%
   summarise(promedio = mean(t_crecimiento, na.rm = T)) %>% 
   spread(nt, promedio) %>% 
   mutate(variable = 'Crecimiento % del consumo') %>% 
-  select(variable, everything())
+  dplyr::select(variable, everything())
 
 
 h1 %>% kable()
@@ -115,7 +115,7 @@ Por su parte el indice de precios al consumidor del precio del Gas de 84 octanos
 un posible quiebre en enero de 2015, y al parecer no tiene un aparente comportamiento estacional
 
 
-```{r, out.width='50%'}
+```{r, fig.cap='IPC', out.width='50%'}
 datos %>% filter(sector1 == 'gas84') %>% 
   ggplot(aes(fecha, ipc)) + geom_line()
 ```

@@ -4,16 +4,19 @@ author: "yo"
 output:
   pdf_document:
     extra_dependencies: subfig
-  html_document:
-    df_print: paged
-  word_document: default
+  #html_document:
+  #  df_print: paged
+  #word_document: default
 lang: es
 bibliography: bib/ref1.bib
 ---
 
 
 <!-- lo que esta escrito en estos signos se omiten en la compilacion del documento -->
-
+<!-- https://bookdown.org/singh_pratap_tejendra/intro_time_series_r/multivariate-ts-analysis.html -->
+<!-- http://blog.mindymallory.com/2018/02/basic-time-series-analysis-the-var-model-explained/
+http://faculty.washington.edu/ezivot/econ584/notes/varModels.pdf
+http://repositorio.uncp.edu.pe/bitstream/handle/UNCP/5374/T010_44909671_T.pdf?sequence=1&isAllowed=y -->
 
 ```{r setup, echo=FALSE, warning=FALSE, include=TRUE}
 # import code  
@@ -21,10 +24,10 @@ bibliography: bib/ref1.bib
 ```
 
 
-
+<!---
 ```{r resumen, child = 'rmd/01resumen.rmd'}
 ```
-
+--->
 ```{r introduccion, child = 'rmd/02intro.rmd'}
 ```
 

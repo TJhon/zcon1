@@ -11,28 +11,37 @@ output:
 # Resumen 1 
 
 - Objetivo
-- Metodologia 
+- Metodologia
+  - Modelo econometrico
+  - Metodo
+  - variables
 - Resultados 
 
-# introduccion 2-3
+# Introduccion 2-3
 
-- Plantear el probleam 
-    - Importancia del problema, 
+- Descripcion historica de las variables 
+- Identificacion del problema 
+- Planteamiento del probleam 
+  - Objetivos
+  - Importancia del problema
 
 # antecedentes teoricos 2 3 
 
-- Trabajos importantes de las variables
-- Resumir los temas relevantes de la teoria 
-- Trabajos previos 
-- Textos, libros 
+- Relacion teorica de las variables 
+   - libros investigaciones
 
 # Antecedentes empiricos 2 - 3
 
-- Trabajo mas importantes de las variables 
-    - Papers(nacional e internacionales) 
-- Resultados de los estudios empiricos 
+- Investigaciones anteriores 
+  - Relacion entre las variables
 
 # Hechos estilizados 2
+
+
+- Tendencias, comportamientos generales de las variables
+  - Graficos en el tiempo por cada variables
+- Tablas por periodos del comportamiento promedio de las variables
+
 
 - Basados en papers del bcrp, 
   - Estadisticas 
@@ -43,21 +52,25 @@ output:
 
 # Modelo teorico 2
 
-- Escoger un modelo relacionado con los hechos estilizados  - 
-- Explicar por que se escogio el modelo modelo 
+- $y  = f(variables)$ 
+  - $lngdp = lnce + e$
+- El porque la eleccion del modelo 
 
 # Hipotesis 1
 
 - Respuesta abticipada, 
-  - Coportamiento de las variables 
+  - Coportamiento causal entre las variables 
 
 # Metodologia  2-3
 
+- Datos
+  - caracteristicas de las variables
+  - Significado de las variables    
+  - Fuente de datos
+  - signo esperado
+- Modelo econometrico (VAR)
+- Metodo(funcional, correlacional?)
 - Decribir el modelo econonetrico 
-- Senalar el metodo que se va a utlizar 
-- Explicar las variables 
-  - Matriz de consistencia 
-- Datos reales o nominales (definidos)
 
 # Resultados 5
 
@@ -66,8 +79,10 @@ output:
   - Grafico  
   - Preubas de hupotesis 
   - Nivel de confiabilidad de los resultados    
+- Conclusiones 
 
-- Conclusion es 
-- Recomendaciones 
+# Recomendaciones 
+
+- Recomendaciones de politica
 
 # Referencia bibliografica 

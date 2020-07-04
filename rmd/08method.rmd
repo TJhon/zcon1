@@ -38,7 +38,7 @@ el indice de precios al consumidor estan a precios base del anio 2012.
 ## Definicion de variables 
 
 La serie de tiempo empleadas estan conformadas por datos mensuales, iniciando en 
-el anio `#r minicio` hasta el anio `#r mfin` con un total de `#r mobs` observaciones.
+el anio 2010.1 hasta el anio 2019.12 con un total de 120 observaciones.
 Todas las variables estan expresadas en logaritmos naturales.
 
 1. Consumo electrico percapita
