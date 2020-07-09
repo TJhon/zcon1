@@ -72,9 +72,13 @@ Donde:
 - $t$: es el tiempo
 
 
-
-
 ## Metodologia econometrica 
+
+
+### Test de raiz unitaria
+
+
+La prueba de estacionariedad es vital en el análisis econométrico de series de tiempo, para evitar una regresion espuria y un incorrecto analisis econometrico. Para evitar esto se recomienda trabajar con variables estacionarias, las cuales se comprueban con las pruebas de raiz unitaria. La economia tiene varios procedimientos de pruebas de raiz unitaria, *Dickey-Fuller* aumentado, el de *phililips perrono*. Las pruebas de de raiz mencionadas, establecen como hipotesis nula donde la raiz de la unidad donde $H_0: \theta = 0$ frente a la hipotesis alternativa de estacionariedad $H_1 \theta<0$. Por lo tanto no rechazar la hipotesis nula de los tests implica la presencia de raices unitarias mientras que el rechazo denota estacionariedad.
 
 ### Vectores autoregresivos (VAR)
 
