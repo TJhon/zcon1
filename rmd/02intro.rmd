@@ -1,7 +1,9 @@
 ---
 output:
+  html_document:
+    df_print: paged
   pdf_document:
-    extra_dependencies: "subfig"
+    extra_dependencies: subfig
 ---
 
 ```{r, echo = FALSE, include=FALSE, warning=FALSE}

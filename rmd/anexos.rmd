@@ -2,7 +2,8 @@
 
 ```{r, include=F}
 library(here)
-d <- read_rds(here('rdatos', '00datos.rmd')) 
+library(lubridate)
+d <- read_rds(here('rdatos', '00datos.rds')) 
 ```
 
 

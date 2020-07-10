@@ -1,6 +1,7 @@
 ---
 output:
-  pdf_document: default
+  pdf_document: 
+    extra_dependencies: subfig
   html_document: default
 ---
 # Resultados 
@@ -12,27 +13,24 @@ output:
 
 ## Descripcion de las variables 
 
-A continuacion se presenta datos descriptivos de las variables las cuales estaran sujertas a la constrastacion 
-de hipotesis y son motivo de investigacion de este trabajo.
-
+A continuacion se presenta datos descriptivos de las variables las cuales estaran sujertas a la constrastacion de hipotesis y son motivo de investigacion de este trabajo.
 
 ```{r}
 library(tidyverse)
 library(here)
 library(GGally)
 library(kableExtra)
+library(broom)
 
+serie <- read_rds(here('rdatos' , 'desestacionalizado.rds'))
 data <- read_rds(here('rdatos', '03est.rds')) %>% 
   dplyr::select(-tcons)
-
-
-
-
 
 data1 <- data %>% as_tibble() %>% 
   mutate(comsumo = log(comsumo))
 
-data1 %>% 
+serie %>% as_tibble() %>% 
+  rename("PIB per capita" = 1, "Consumo per capita" = 2) %>% 
   gather(variable, v1) %>% 
   group_by(variable) %>% 
   summarise(n = n(), 
@@ -50,34 +48,41 @@ En la anterior tabla se mostro lo principales datos estadisticos descriptivos de
 
 ## Correlaciones 
 
-```{r}
-data %>% as_tibble() %>% 
+## Niveles
+
+```{r pib-fig, fig.dim=c(5, 3), fig.cap='Correlaciones', fig.subcap=c('Niveles', 'Priera diferencias'), out.width='50%', fig.ncol=2, fig.align='center'}
+
+serie %>% as_tibble() %>% 
+  rename("PIB percapita" = 1, 'Consumo electrico per capita' = 2) %>% 
    ggpairs()
+
+serie %>% diff %>% 
+  as_tibble() %>% 
+  rename("PIB percapita" = 1, 'Consumo electrico per capita' = 2) %>% 
+  ggpairs() + labs(title = '1Diff') 
 ```
-```{r}
-library(urca)
-library(tseries)
-d <- diff(data$comsumo)
-d2 <- diff(data$ipc)
-df1 <- adf.test(d, k = 0)
-df2 <- adf.test(data1$tcpbi, k = 1)
-df3 <- adf.test(d2, k = 1)
-```
+
+
 
 ## Raiz unitaria 
 
 
 ```{r}
-tibble(
-  lags = c(0,1, 1),
-  raiz = c(df1$statistic, df2$statistic, df3$statistic)
-  #p-value = c(df1$p.value[1], df2$p.value[1], df3$p.value[1])
-  ) %>% kable()
-
+read_rds(here('rdatos', 'raiz.rds')) %>% 
+  kable(caption = 'Augmented Dickey–Fuller - Prueba de raiz unitaria ')
 ```
 
+## VAR(p)
 
+Escoger el orden p mediante los criterios mediante AIC 
 
+```{r}
+library(magrittr)
+orden_p <- serie %>%  diff %>%  vars::VARselect(lag.max = 12)# %$% #%$% criteria  %>% glimpse()
+tibble(criterio = c("AIC", "HQ", "SC", "FPE"), 
+  "Orden p" = c(3, 1 ,1 ,3)) %>% kable
+
+```
 
 
 
@@ -96,91 +101,150 @@ m1 %>% stargazer::stargazer(column.labels = c('MCO') )
 ### VAR
 
 ```{r, result = 'asis'}
-library(vars)
+
+### Seleccion de retardos 
+acf(serie %>% diff)
 
 
-m1 <- VAR(data, p = 2, type = 'const', season = NULL)
 
-#stargazer::stargazer(m1$varresult$comsumo, m1$varresult$ipc, m1$varresult$tcpbi)
+
+m1 <- serie %>% diff %>% vars::VAR(., p = 1,  season = NULL) 
+m3 <- serie %>% diff %>% vars::VAR(., p = 3,  season = NULL) 
+
+#stargazer::stargazer(m1$varresult$pib_d,
+#m1$varresult$cons_d, 
+#m3$varresult$cons_d, 
+#m3$varresult$pib_d)
 
 ```
 
 \begin{table}[!htbp] \centering 
   \caption{} 
   \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
- & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-4} 
-\\[-1.8ex] & \multicolumn{3}{c}{y} \\ 
-\\[-1.8ex] & (consumo) & (ipc) & (tcpbi)\\ 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{y} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
 \hline \\[-1.8ex] 
- comsumo.l1 & 0.608$^{***}$ & 0.007 & $-$0.001 \\ 
-  & (0.104) & (0.007) & (0.005) \\ 
-  & & & \\ 
- tcpbi.l1 & $-$1.604 & $-$0.118 & $-$0.447$^{***}$ \\ 
-  & (2.247) & (0.149) & (0.106) \\ 
-  & & & \\ 
- ipc.l1 & 3.896$^{***}$ & 0.940$^{***}$ & 0.058 \\ 
-  & (1.454) & (0.097) & (0.069) \\ 
-  & & & \\ 
- comsumo.l2 & 0.348$^{***}$ & $-$0.003 & $-$0.002 \\ 
-  & (0.102) & (0.007) & (0.005) \\ 
-  & & & \\ 
- tcpbi.l2 & $-$1.049 & $-$0.060 & $-$0.272$^{***}$ \\ 
-  & (1.905) & (0.126) & (0.090) \\ 
-  & & & \\ 
- ipc.l2 & $-$2.689$^{*}$ & $-$0.091 & 0.001 \\ 
-  & (1.463) & (0.097) & (0.069) \\ 
-  & & & \\ 
- const & $-$13.034 & 6.064$^{**}$ & $-$0.460 \\ 
-  & (37.823) & (2.510) & (1.784) \\ 
-  & & & \\ 
+ pib\_d.l1 & $-$0.344$^{***}$ & 0.105 & 0.046 & $-$0.530$^{***}$ \\ 
+  & (0.101) & (0.081) & (0.093) & (0.108) \\ 
+  & & & & \\ 
+ cons\_d.l1 & $-$0.047 & $-$0.485$^{***}$ & $-$0.466$^{***}$ & 0.014 \\ 
+  & (0.120) & (0.097) & (0.112) & (0.131) \\ 
+  & & & & \\ 
+ pib\_d.l2 &  &  & $-$0.132 & $-$0.417$^{***}$ \\ 
+  &  &  & (0.101) & (0.118) \\ 
+  & & & & \\ 
+ cons\_d.l2 &  &  & 0.006 & 0.077 \\ 
+  &  &  & (0.124) & (0.144) \\ 
+  & & & & \\ 
+ pib\_d.l3 &  &  & 0.009 & $-$0.200$^{*}$ \\ 
+  &  &  & (0.094) & (0.110) \\ 
+  & & & & \\ 
+ cons\_d.l3 &  &  & $-$0.042 & $-$0.108 \\ 
+  &  &  & (0.111) & (0.130) \\ 
+  & & & & \\ 
+ const & 0.004$^{***}$ & 0.005$^{***}$ & 0.006$^{***}$ & 0.005$^{***}$ \\ 
+  & (0.001) & (0.001) & (0.001) & (0.002) \\ 
+  & & & & \\ 
 \hline \\[-1.8ex] 
-Observations & 117 & 117 & 117 \\ 
-R$^{2}$ & 0.993 & 0.967 & 0.215 \\ 
-Adjusted R$^{2}$ & 0.993 & 0.965 & 0.172 \\ 
-Residual Std. Error (df = 110) & 24.882 & 1.651 & 1.173 \\ 
-F Statistic (df = 6; 110) & 2,756.900$^{***}$ & 533.881$^{***}$ & 5.024$^{***}$ \\ 
+Observations & 118 & 118 & 116 & 116 \\ 
+R$^{2}$ & 0.134 & 0.192 & 0.215 & 0.258 \\ 
+Adjusted R$^{2}$ & 0.119 & 0.178 & 0.172 & 0.217 \\ 
+Residual Std. Error & 0.014 (df = 115) & 0.011 (df = 115) & 0.011 (df = 109) & 0.013 (df = 109) \\ 
+F Statistic & 8.900$^{***}$ (df = 2; 115) & 13.665$^{***}$ (df = 2; 115) & 4.989$^{***}$ (df = 6; 109) & 6.313$^{***}$ (df = 6; 109) \\ 
 \hline 
 \hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
 \end{table} 
 
 
 ```{r}
-
-#serial.test(m1, lags.pt = 12, type = 'PT.asymptotic')
-#arch.test(m1, lags.multi = 12, multivariate.only = T)
-#normality.test(m1, multivariate.only = T)
-
-stability(m1, type = 'OLS-CUSUM') %>% plot()
+#vars::causality(m1, cause =  'pib_d')#, vcov. = vcovHC(m1))
+#vars::causality(m1, cause =  'cons_d') 
+#vars::causality(m3, cause =  'pib_d')
+#vars::causality(m3, cause =  'cons_d') 
 ```
+
+
+
+```{r}
+
+#vars::serial.test(m3, lags.pt = 12, type = 'PT.asymptotic')
+#vars::arch.test(m1, lags.multi = 12, multivariate.only = T)
+#vars::normality.test(m1, multivariate.only = T)
+
+vars::stability(m1, type = 'OLS-CUSUM') %>% plot
+vars::stability(m3, type = 'OLS-CUSUM') %>% plot
+```
+
 
 ### Granger
 
+
+VAR(1)
+
 ```{r}
-causality(m1, cause = 'tcpbi')$Granger
+vars::causality(m1, cause = 'pib_d')$Granger
 ```
 
 Este resultado nos dice que no existe causalidad que va desde el crecimiento hacia el consumo electrico y precios
 
 ```{r}
-causality(m1, cause = 'comsumo')$Granger
+vars::causality(m1, cause = 'cons_d')$Granger
 ```
+
+
 Este otro resultado menciona que hay relacion causal que va desde el consumo electrico haci el crecimiento economico y los precios.
 
 
-<!---
-### Impulso respuesta
+VAR(3)
 
 ```{r}
-
-
-irf(m1, impulse = 'tcpbi', response = 'comsumo', n.ahead = 20, boot =T) %>% plot
-irf(m1, impulse = 'comsumo', response = 'tcpbi', n.ahead = 20, boot =T) %>% plot
+vars::causality(m3, cause = 'pib_d')$Granger
+vars::causality(m3, cause = 'cons_d')$Granger
 ```
--->
 
+
+
+### Causalidad inmediata
+
+
+VAR(1)
+```{r}
+vars::causality(m1, cause = 'pib_d')$Instant
+vars::causality(m1, cause = 'cons_d')$Instant
+```
+
+VAR(3)
+
+```{r}
+vars::causality(m3, cause = 'pib_d')$Instant
+vars::causality(m3, cause = 'cons_d')$Instant
+```
+
+
+
+### Impulso respuesta
+
+VAR(1)
+
+```{r, fig.cap='Impulso respuesta VAR(1)', fig.subcap=c('Producto percapita', 'Consumo percapita'), out.width='50%', fig.ncol=2, fig.align='center'}
+vars::irf(m1, impulse = 'cons_d', response = 'pib_d', n.ahead = 10, boot =T) %>% plot
+vars::irf(m1, impulse = 'pib_d', response = 'cons_d', n.ahead = 10, boot =T) %>% plot
+```
+
+
+VAR(3)
+
+```{r, fig.cap='Impulso respuesta VAR(3)', fig.subcap=c('Producto percapita', 'Consumo percapita'), out.width='50%', fig.ncol=2, fig.align='center'}
+vars::irf(m3, impulse = 'pib_d', response = 'cons_d', n.ahead = 10, boot =T) %>% plot
+vars::irf(m3, impulse = 'cons_d', response = 'pib_d', n.ahead = 20, boot =T) %>% plot
+
+```
+
+\newpage

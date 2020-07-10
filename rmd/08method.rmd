@@ -25,7 +25,6 @@ output:
 
 La investigacion es de tipo explicativo, ya que se busca saber las causas de los hechos. Su objetivo es focalizarse y justificar por que sucede un hechos, bajo que condiciones se manifiesta, como ha venido evolucionado, y la relacion que podria existir entre ellas. Em metodo universal es el funcionalista, ya que se planetea que cada de las partes cumple un papel en la funcion y forma parte del todo. En tanto al metodo general se identifica que es deductivo ya que a partir de enunciados principios generales señalados en el marco teórico se deduce una hipótesis que postula una relación de tipo causal. y por ultimo el metodo particular es el empirico-estadistico en particular el uso un modelo VAR para la constrastacion de hipotesis.
 
-
 ## Recoleccion de datos 
 
 Datos mensuales desde enero del 2010 hasta diciembre del 2019, el Producto interno Bruto es extraido de la base de datos
@@ -76,7 +75,6 @@ Donde:
 
 
 ### Test de raiz unitaria
-
 
 La prueba de estacionariedad es vital en el análisis econométrico de series de tiempo, para evitar una regresion espuria y un incorrecto analisis econometrico. Para evitar esto se recomienda trabajar con variables estacionarias, las cuales se comprueban con las pruebas de raiz unitaria. La economia tiene varios procedimientos de pruebas de raiz unitaria, *Dickey-Fuller* aumentado, el de *phililips perrono*. Las pruebas de de raiz mencionadas, establecen como hipotesis nula donde la raiz de la unidad donde $H_0: \theta = 0$ frente a la hipotesis alternativa de estacionariedad $H_1 \theta<0$. Por lo tanto no rechazar la hipotesis nula de los tests implica la presencia de raices unitarias mientras que el rechazo denota estacionariedad.
 

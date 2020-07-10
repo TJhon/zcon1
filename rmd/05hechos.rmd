@@ -16,7 +16,7 @@ library(ggplottimeseries)
 library(GGally)
 library(tsibble)
 library(lubridate)
-datos <- read_rds(here('rdatos', '00datos.rmd'))
+datos <- read_rds(here('rdatos', '00datos.rds'))
 ```
 
 A continucion se muestra los hechos resaltantes de las variables relevantes en la investigacion.
