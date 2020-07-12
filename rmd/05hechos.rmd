@@ -21,7 +21,7 @@ datos <- read_rds(here('rdatos', '00datos.rds'))
 
 A continuación se muestra los hechos resaltantes de las variables relevantes en la investigación.
 
-## Evolucion del PIB 
+## Evolución del PIB 
 
 En la figura \@ref(fig: pib-fig) se muestra el comportamiento temporal del PIB nacional mensual^[Ver anexos las desestacionalizaciones de las variables] a precios constantes del 2012, así mismo la evolución de algunos sectores productivos los cuales prescinden del consumo eléctrico en sus actividades productivas. En las sub-figuras se muestran que en ambas figuras tienen un comportamiento ascendente, además de tener un comportamiento estacional por meses. Hasta que, en marzo del 2020, tuviese una caída dramática en el nivel de actividad económica, esto causado por la suspensión de las actividades económicas no indispensables, así como el traslado de personas a nivel nacional e internacional. 
 La tasa de crecimiento (para datos desestacionalizados) hasta el 2020 tenía valores positivos para casi todos los sectores y tienen una fuerte caída para inicios del 2020.
@@ -77,7 +77,7 @@ cómo se puede observar, los sectores que más crecieron en el periodo `r names(
 
 \newpage
 
-## Consumo electrico
+## Consumo eléctrico
 
 Al igual que el PIB, tiene un comportamiento tendencial, y tambien tiene cierta estacionalidad por periodos.
 

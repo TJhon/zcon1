@@ -2,13 +2,13 @@
 title: 'Crecimiento económico y consumo eléctrico'
 date: "`r format(Sys.Date(), '%a %d %b, %Y')`"
 output:
+  word_document: default
   pdf_document:
     toc: true
     include:
       in_header: tex/header.tex
     extra_dependencies: subfig
     number_sections: true
-  word_document: default
   html_document:
     df_print: paged
 lang: es

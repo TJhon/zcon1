@@ -136,7 +136,7 @@ no.space = F
 
 Para ver la estabilidad de los modelos la figura \@ref(fig: varest) muestra que existe estabilidad en los modelos, ya que el comportamiento de las variables esta en la banda del 5%.
 
-```{r varest, fig.cap='Estabilidad de los modelos', fig.subcap=c('VAR(1)', 'VAR(3)'), out.width='50%', fig.ncol=2, fig.align='center'}
+```{r varest, fig.cap='Estabilidad de los modelos', fig.subcap=c('VAR(1)', 'VAR(3)'), out.width='50%', fig.ncol=2, fig.align='center', fig.pos="H"}
 
 #vars::serial.test(m3, lags.pt = 12, type = 'PT.asymptotic')
 #vars::arch.test(m1, lags.multi = 12, multivariate.only = T)
@@ -145,7 +145,7 @@ Para ver la estabilidad de los modelos la figura \@ref(fig: varest) muestra que 
 vars::stability(m1, type = 'OLS-CUSUM') %>% plot
 vars::stability(m3, type = 'OLS-CUSUM') %>% plot
 ```
-\newpage
+
 
 ### Causalidad
 

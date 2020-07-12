@@ -7,7 +7,7 @@ gitcoma.sh
 datos/excel
 datos/rds
 *.css
-*.docx
+
 *.md
 *.xlsx
 *.xls

@@ -15,7 +15,7 @@ library(readr)
 library(glue)
 library(tsibble)
 theme_set(theme_minimal())
-knitr::opts_chunk$set(fig.pos = "h", # Fijar posicion de las figuras 
+knitr::opts_chunk$set(fig.pos = "H", # Fijar posicion de las figuras 
                       echo = F, # si es FALSE Correr el codigo pero mostrarlo
                       message = F, # si es FALSE Mensajes omitidos
                       warning = F, # si es FALSE Advertencias omitidas
@@ -34,7 +34,7 @@ kableExtra.auto_format = FALSE
 datos <- read_rds(here('rdatos', '00datos.rds'))
 ```
 
-# Introduccion 
+# Introducción 
 
 <!-- 2 - 3 paginas -->
 <!-- > Planteamiento del problema: la importancia del tema  -->
@@ -124,7 +124,7 @@ autónoma y transparente. -->
 
  
 
-## Importancia de la investigacion 
+## Importancia de la investigación 
 
 Actualmente las investigaciones en el Perú respecto a la relación crecimiento económico y consumo de electricidad son escasos, por lo que aún no se sabe empíricamente el mecanismo de trasmisión del tema. Por lo que el desarrollo de la investigación tratara de cubrir ese vacío en literatura para que pueda servir tanto para la aplicación de política pública u optimización eficiente de los recursos energéticos.
 

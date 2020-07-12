@@ -5,7 +5,7 @@ output:
   html_document:
     df_print: paged
 ---
-# Metodologia 
+# Metodología 
 
 <!-- 2 - 3 paginas -->
 <!-- describir el modelo econometirco que se va a utilizar -->
