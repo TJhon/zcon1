@@ -19,14 +19,15 @@ library(lubridate)
 datos <- read_rds(here('rdatos', '00datos.rds'))
 ```
 
-A continucion se muestra los hechos resaltantes de las variables relevantes en la investigacion.
+A continuación se muestra los hechos resaltantes de las variables relevantes en la investigación.
 
 ## Evolucion del PIB 
 
-En la figura \@ref(fig:pib-fig) se muestra el comportamiento temporal del PIB nacional mensual^[Ver anexos las desestacionalizacion de las varibles] a precios constantes del 2012, asi mismo la evolucion de algunos sectores productivos los cuales presinden del consumo electrico en sus actividades productivas. En las subfiguras se muestran que en ambas figuras tienen un comportamiento ascendente, ademas de tener un comportamiento estacional por meses. Hasta que en marzo del 2020, tuviese una caida dramatica en el nivel de actividad economica, esto causado por la suspencion de las actividades economicas no indispensables, asi como el traslado de personas a nivel nacional e internacional. 
-La tasa de crecimiento (para datos desestacionalizados) hasta el 2020 tenia valores positivos para casi todos los sectores y tienen una fuerte caida para inicios del 2020.
+En la figura \@ref(fig: pib-fig) se muestra el comportamiento temporal del PIB nacional mensual^[Ver anexos las desestacionalizaciones de las variables] a precios constantes del 2012, así mismo la evolución de algunos sectores productivos los cuales prescinden del consumo eléctrico en sus actividades productivas. En las sub-figuras se muestran que en ambas figuras tienen un comportamiento ascendente, además de tener un comportamiento estacional por meses. Hasta que, en marzo del 2020, tuviese una caída dramática en el nivel de actividad económica, esto causado por la suspensión de las actividades económicas no indispensables, así como el traslado de personas a nivel nacional e internacional. 
+La tasa de crecimiento (para datos desestacionalizados) hasta el 2020 tenía valores positivos para casi todos los sectores y tienen una fuerte caída para inicios del 2020.
 
-```{r pib-fig, fig.dim=c(5, 3), fig.cap='Comportamiento Temporal de las variables', fig.subcap=c('PIB nacional', 'PIB sectorial', 'Variaciones anuales'), out.width='50%', fig.ncol=2, fig.align='center'}
+
+```{r pib, fig.dim=c(5, 3), fig.cap='Comportamiento Temporal de las variables', fig.subcap=c('PIB nacional', 'PIB sectorial', 'Variaciones anuales'), out.width='50%', fig.ncol=2, fig.align='center'}
 datos %>% 
  filter(sector == 'nacional') %>% 
  ggplot(aes(fecha, pib)) + geom_line()
@@ -60,22 +61,25 @@ h1 <- datos %>%# filter(sector != 'construccion') %>%
   group_by(sector, int) %>% 
   summarise(promedio = mean(t_crecimiento, na.rm = T)) %>% 
   spread(int, promedio) %>% 
+  rename(Sector = 1) %>% 
   arrange(5)
 
 
-h1 %>% kable()
+sable(h1, caption = "Tasa de crecimiento")
 ```
 
 A el PIB nacional en periodo 2007 - 2011 tuvo un crecimiento promedio de 4.90%, periodo 2012-2015 un crecimiento del 4.1%, en 
-el periodo 2015-2019  de un 3.05%,  pero para los datos disponibles del 2020 se nota un decrecimiento de la economia, de un 21%.
+el periodo 2015-2019 de un 3.05%, pero para los datos disponibles del 2020 se nota un decrecimiento de la economía, de un 21%.
 Mientras que para otros sectores productivos tiene casi el mismo comportamiento, 
-el promedio de las tasas de  crecimiento de los sectores en el periodo temporal 2007 - 2020.4, 
-como se puede observar, los sectores que mas crecieron en el periodo `r names(h1)[2]` fueron los sectores de construccion y los otros servicios, el cual tiene incluido al las prestaciones de servicios financieros, para el periodo `r names(h1)[3]` en promedio el sector construccion cayo a casi la mitad de su crecimiento del anterior periodo mencionado, por otra parte la tasa de crecimiento de sector "Otros servicios" tenia tendencia a la baja, hasta el siguiente periodo `r names(h1)[4]` el cual casi todos los sectores en promedio solo fue de 3.5%, por ultimo desde inicios del 2020 se registro caidas abruptas en los sectores de construcion (`r h1[1,5]` %), manufactura (`r h1[2,5]` %) y mineria(`r h1[3,5]` %).
+el promedio de las tasas de crecimiento de los sectores en el periodo temporal 2007 - 2020.4, 
+cómo se puede observar, los sectores que más crecieron en el periodo `r names(h1)[2]` fueron los sectores de construcción y los otros servicios, el cual tiene incluido a las prestaciones de servicios financieros, para el periodo `r names(h1)[3]` en promedio el sector construcción cayo a casi la mitad de su crecimiento del anterior periodo mencionado, por otra parte la tasa de crecimiento de sector "Otros servicios" tenía tendencia a la baja, hasta el siguiente periodo `r names(h1)[4]` el cual casi todos los sectores en promedio solo fue de 3.5%, por ultimo desde inicios del 2020 se registró caídas abruptas en los sectores de construcción (`r h1[1,5]` %), manufactura (`r h1[2,5]` %) y minería(`r h1[3,5]` %).
 
+
+\newpage
 
 ## Consumo electrico
 
-Al igual que el PIB, tiene un comportamiento tendencial, y tambien tiene estacionalidad por periodos, 
+Al igual que el PIB, tiene un comportamiento tendencial, y tambien tiene cierta estacionalidad por periodos.
 
 ```{r, fig.cap='Comportamiento Temporal del consumo electrico', out.width='50%'}
 datos %>%  
@@ -84,7 +88,8 @@ datos %>%
   ggplot(aes(fecha, consumo)) + geom_line()
 ```
 
-Por su parte la tasa de crecimiento del consumo electrico para datos desestacionalizados esta presente en la tabla *siguiente*, donde en promedio en el periodo del 2007 al 2011 su crecimiento fue de 7.4%, en los posteriores anios se nota una descendencia de la tasa de crecimiento a 5.6% para los anios 2012-2015, y otra descencia a 4.3% para el periodo 2015-2019, y hasta marzo del 2020 se nota una drastica caida de la tasa a -12% en el consumo electrico, esta ultima a causa de la crisis sanitaria.
+Por su parte la tasa de crecimiento del consumo eléctrico para datos desestacionalizados está presente en el cuadro *siguiente*, donde en promedio en el periodo del 2007 al 2011 su crecimiento fue de 7.4%, en los posteriores años se nota una descendencia de la tasa de crecimiento a 5.6% para los años 2012-2015, y otra decencia a 4.3% para el periodo 2015-2019, y hasta marzo del 2020 se nota una drástica caída de la tasa a -12% en el consumo eléctrico, esta última a causa de la crisis sanitaria. Lamentablemente no se pudo obtener los datos agregados de los clientes libres o datos referidos a sectores industriales ya que esto reforzaria los resultados de los modelos.
+
 
 ```{r}
 h1 <- datos %>%
@@ -103,11 +108,11 @@ h1 <- datos %>%
   mutate(variable = 'Crecimiento % del consumo') %>% 
   dplyr::select(variable, everything())
 
+sable(h1)
 
-h1 %>% kable()
 ```
 
-
+<!--
 
 ## Indice de precios al consumidor
 
@@ -140,4 +145,4 @@ h1 <- datos %>%
 h1 %>% kable()
 ```
 
- La tabla muestra un crecimiento promedio, del 1.4% en todo el espacio temporal, en el periodo 2007-2011 fue de 0.9%, mientras que para el periodo 2012-2015 tiene un crecimiento del 2.7%, y para lalas ultimas fechas observadas fue de 2.3%.
+ La tabla muestra un crecimiento promedio, del 1.4% en todo el espacio temporal, en el periodo 2007-2011 fue de 0.9%, mientras que para el periodo 2012-2015 tiene un crecimiento del 2.7%, y para lalas ultimas fechas observadas fue de 2.3%.-->

@@ -13,7 +13,7 @@ output:
 
 ## Descripcion de las variables 
 
-A continuacion se presenta datos descriptivos de las variables las cuales estaran sujertas a la constrastacion de hipotesis y son motivo de investigacion de este trabajo.
+A continuación, se presenta datos descriptivos de las variables las cuales estarán sujetas a la contrastación de hipótesis y son motivo de investigación de este trabajo.
 
 ```{r}
 library(tidyverse)
@@ -42,26 +42,27 @@ describir <- serie %>% as_tibble() %>%
             Promedio = mean(v1), 
             SD = sd(v1), 
             Curtosis = e1071::kurtosis(v1)) 
-describir %>% kable(caption = "Estadisticas descriptivas /n del PIB per-capita y el consumo electrico per-capita, series mensuales 2010.1 - 2019.12")
+
+sable(describir, caption = "Estadisticas descriptivas /n del PIB per-capita y el consumo electrico per-capita, series mensuales 2010.1 - 2019.12")
 
 ```
 
-En la anterior tabla se mostro lo principales datos estadisticos descriptivos de las variables que se han usado para la constrastacion de las hipotesis, el Producto interno per-capita y el Consumo electrico per-capita, siendo su medias de `r describir[6][[1]][2]` soles y `r describir[6][[1]][1]` kW respectivamente, con minimos de `r describir[3][[1]][2]` soles y de `r describir[3][[1]][1]` kW, y maximos de `r describir[4][[1]][2]` soles y `r describir[4][[1]][2]` kW, lo que indica que tanto el ingreso percapita y el consumo electrico percapita se han incrementado en el periodo senalado, la curtosis que muestra el grado de concentracion en la zona de distribucion muestran que el pib percapita tiene un valor de `r describir[8][[1]][2]` la cual senala que sigue una distribucion platicúrtica, al igual que el consumo percapita  `r describir[8][[1]][1]` esta un poco mas sesgada que la anterior.
+En la anterior tabla se mostró lo principales datos estadísticos descriptivos de las variables que se han usado para la contrastación de las hipótesis, el Producto interno per-cápita y el Consumo eléctrico per-cápita, siendo su medias de `r describir[6][[1]][2]` soles y `r describir[6][[1]][1]` kW respectivamente, con mínimos de `r describir[3][[1]][2]` soles y de `r describir[3][[1]][1]` kW, y máximos de `r describir[4][[1]][2]` soles y `r describir[4][[1]][2]` kW, lo que indica que tanto el ingreso per cápita y el consumo eléctrico per cápita se han incrementado en el periodo señalado, la curtosis que muestra el grado de concentración en la zona de distribución muestran que el pub per cápita tiene un valor de `r describir[8][[1]][2]` la cual señala que sigue una distribución platicúrtica, al igual que el consumo per cápita  `r describir[8][[1]][1]` está un poco más sesgada que la anterior.
 
 ## Correlaciones 
 
-Las siguientes figuras muestran las correlaciones de las variables, para las series temporales en niveles se tiene una relacion positiva, con un coeficiente de correlacion de Pearson del 0.98 significativo al 1%, por otro lado para evitar una regresion espuria se diferencio(ver b) una vez para ver las relaciones de las variables, se nota que las variables siguen una distribucion asimilada a la normal y con una correlacion de Pearson de 0.51, este es significativo al 1%. 
+Las siguientes figuras muestran las correlaciones de las variables, para las series temporales en niveles se tiene una relación positiva, con un coeficiente de correlación de Pearson del 0.98 significativo al 1%, como se mencionó anteriormente, en series temporales existe el riesgo de hacer una regresión espuria por lo que no solo se debe ver la correlación en niveles sino también con las correcciones habituales a las series de tiempo como son, tomando una transformación logarítmica y/o integrando las series hasta que estas sean estacionarias, dicho esto se muestra también la relación entre las variables tomando logaritmos y diferenciando una vez, Se ve en al sub-figuras (b) que las variables siguen una distribución asimilada a la normal y con una correlación de Pearson de 0.51 y este es significativo al 1%.
 
 ```{r pib-fig, fig.dim=c(5, 3), fig.cap='Correlaciones', fig.subcap=c('Niveles', 'Primera diferencia'), out.width='50%', fig.ncol=2, fig.align='center'}
 
 serie %>% exp %>%  
   as_tibble() %>% 
-  rename("PIB percapita" = 1, 'Consumo electrico per capita' = 2) %>% 
+  rename("PIB per capita" = 1, 'Consumo electrico per capita' = 2) %>% 
    ggpairs() + labs(title = "Tranforma")
 
 serie %>% diff %>% 
   as_tibble() %>% 
-  rename("PIB percapita" = 1, 'Consumo electrico per capita' = 2) %>% 
+  rename("PIB per capita" = 1, 'Consumo electrico per capita' = 2) %>% 
   ggpairs() 
 
 ```
@@ -72,32 +73,33 @@ serie %>% diff %>%
 
 ### Raiz unitaria 
 
-Como se menciono anteriormente los modelos de series de tiempo deben tener en cuenta que las variables de analisis deben ser estacionarias, para comprobar eso se realizan test de raiz unitaria la cual el rechazo de las hipotesis nulas es la presencia de estacionariedad de las variables. En la tabla \@ref(table: raiz) se muestra los resultados de los test de Dickey-Fuller aplicado en niveles y diferencias, mediante estos resultados ninguna de estas variables son estacionarias en niveles ya que los valores de los p-valor son mayores al 5% aceptando la hipotesis nula de no estacionariedad, mientras que si lo son en la primeras diferencias ya que sus p-valor son menores al 5% rechazando la hipotesis nula y aceptando la hipotesis nula de estacionariedad. 
+Para comprobar la estacionariedad de las variables, se realiza el test de raíz unitaria Augmented Dickey–Fuller (ADF) la cual establece que el rechazo de la hipótesis nula significa la presencia de estacionariedad de las variables. En la tabla \@ref(table: raíz) se muestra los resultados de los test de Dickey-Fuller aplicado en niveles y diferencias, mediante estos resultados ninguna de estas variables es estacionarias en niveles ya que los valores de los p-valor son mayores al 5% aceptando la hipótesis nula de no estacionariedad, mientras que si lo son en las primeras diferencias ya que sus p-valor son menores al 5% rechazando la hipótesis nula y aceptando la hipótesis nula de estacionariedad.
 
 
 ```{r, raiz}
 read_rds(here('rdatos', 'raiz.rds')) %>% 
-  kable(caption = 'Augmented Dickey–Fuller - Prueba de raiz unitaria ')
+  sable(caption = 'Augmented Dickey–Fuller - Prueba de raiz unitaria ') %>% 
+  pack_rows("Transformacion logaritmica", 1, 2) %>%
+  pack_rows("Primera diferencia", 3, 4)
+
 ```
 
 ### VAR($p$)
 
-Los criterios para seleccionar el orden $p$ el programa estadistico, muestra mediante los siguientes criterios, *Akaike information criterion* (AIC) es de orden 3, el criterio de *Hanann-Quinn* (HQ) establece un orden 1, *Schwarzz Bayesian criterion* (SC) establece un orden 1, y el *Final predictor error* (FPE) establece un orden $p$ de 3. Ya que se reparten en 50% de orden 3 y 50% de orden 1 se prodecera hacer la estimacion de los modelos VAR(1) y VAR(3).
+Los criterios para seleccionar el orden $p$ el programa estadístico, muestra mediante los siguientes criterios, *Akaike información criterio* (AIC) es de orden 3, el criterio de *Hanann-Quinn* (HQ) establece un orden 1, *Schwarzz Bayesian criterion* (SC) establece un orden 1, y el *Final predictor error* (FPE) establece un orden $p$ de 3. Ya que se reparten en 50% de orden 3 y 50% de orden 1 se procederá hacer la estimación de los modelos VAR (1) y VAR (3).
 
 ```{r}
 library(magrittr)
 orden_p <- serie %>%  diff %>%  vars::VARselect(lag.max = 12)# %$% #%$% criteria  %>% glimpse()
 tibble("Criterio" = c("AIC", "HQ", "SC", "FPE"), 
-  "Orden p" = c(3, 1 ,1 ,3)) %>% kable(caption = 'Lag selection')
+  "Orden p" = c(3, 1 ,1 ,3)) %>% sable(caption = 'Lag selection', full = F) 
 ```
-
-
 
 ### VAR
 
-A continuacion se muestran los coeficientes de las estimaciones, los resultados muestran que para un modelo VAR(1) y VAR(3), donde para el modelo  VAR(1) el rezago temporal de cada variable es significativa para si mismas, mientras que el reazago temporal del consumo electrico percapita no es significativo para el PIB percapita y a la inversa. En tanto la estimacion del PIB per-capita se tiene un $R^2 = 13.4$% y para el consumo percapita se tiene un $R^2 = 19.2\%$. El PIb percapita depende de su propio rezago negativamente (-0.33), de igual manera que el consumo electrico tiene signo negativo de su propio rezago (-0.48), las constantes estimadas son significativas para ambos modelos. 
+A continuación, se muestran los coeficientes de las estimaciones, los resultados muestran que para un modelo VAR (1) y VAR (3), donde para el modelo VAR (1) el rezago temporal de cada variable es significativa para sí mismas, mientras que el rezago temporal del consumo eléctrico per cápita no es significativo para el Crecimiento económico y a la inversa. En tanto la estimación del crecimiento económico se tiene un $R^2 =$ 13.4% y para el consumo per cápita se tiene un $R^2$ = 19.2%. El Crecimiento económico depende de su propio rezago negativamente (-0.34), aunque no es significativa el parámetro del primer rezago del consumo es negativo lo que significa que el efecto de este sobre el consumo sobre el crecimiento económico es retractivo este se comprobara en los gráficos de impulso respuesta, de igual manera que el consumo eléctrico tiene signo negativo de su propio rezago (-0.48), aunque el primer rezago de la variable del crecimiento económico no es significativo estadísticamente este tiene un efecto positivo sobre las variaciones del consumo eléctrico, las constantes estimadas son significativas para ambos modelos. 
 
-En cuanto el modelo VAR(3) el modelo para el PIB percapita tiene un $R^2 = 21.5\%$ y para el consumo percapita se tiene un $R^2 = 25.8\%$, en cuanto a la significancia de los parametros se tiene que para el PIB percapita son significativos el primer rezago del consumo electrcico (-0.46) y la constante, los demas parametros no son significativos ni al 10% aunque si lo son globalmente por el $F_Statistic$ (4.8). Para el modelo del consumo electrico la variables significativas son la constante, el primer, segundo y tercer rezago del PIB percapita, los 2 primeros rezagos del PIB percapita significativos al 1%, siendo sus coeficientes -0.530 y -0.417 respectivamente, mientras que el tercer rezago es significativo al 10% con un coeficienete de -0.2, las demas variables se aceptan por el $F_Statistic$ (6.3).
+En cuanto el modelo VAR(3) el modelo para el Crecimiento económico tiene un $R^2 =$ 21.5% y para el consumo per cápita se tiene un $R^2 =$ 25.8%, en cuanto a la significancia de los parámetros se tiene que para el Crecimiento económico son significativos el primer rezago del consumo eléctrico (-0.46) y la constante, los demás parámetros no son significativos ni al 10% aunque sí lo son globalmente por el $F_Statistic$ (4.8). Para el modelo del consumo eléctrico las variables significativas son la constante, el primer, segundo y tercer rezago del PIB per cápita, los 2 primeros rezagos del Crecimiento económico significativos al 1%, siendo sus coeficientes -0.530 y -0.417 respectivamente, mientras que el tercer rezago es significativo al 10% con un coeficiente de -0.2, las demás variables se aceptan por el $F_Statistic$ (6.3).
 
 
 ```{r, results = 'asis'}
@@ -132,9 +134,9 @@ no.space = F
 ```
 
 
-Para ver la estabilidad de los modelos la siguiente figura muestra que existe estabilidad en los modelos, ya que el comportamiento de las variables esta en la banda del 5%.
+Para ver la estabilidad de los modelos la figura \@ref(fig: varest) muestra que existe estabilidad en los modelos, ya que el comportamiento de las variables esta en la banda del 5%.
 
-```{r, fig.cap='Estabilidad de los modelos', fig.subcap=c('VAR(1)', 'VAR(3)'), out.width='50%', fig.ncol=2, fig.align='center'}
+```{r varest, fig.cap='Estabilidad de los modelos', fig.subcap=c('VAR(1)', 'VAR(3)'), out.width='50%', fig.ncol=2, fig.align='center'}
 
 #vars::serial.test(m3, lags.pt = 12, type = 'PT.asymptotic')
 #vars::arch.test(m1, lags.multi = 12, multivariate.only = T)
@@ -143,11 +145,16 @@ Para ver la estabilidad de los modelos la siguiente figura muestra que existe es
 vars::stability(m1, type = 'OLS-CUSUM') %>% plot
 vars::stability(m3, type = 'OLS-CUSUM') %>% plot
 ```
-
+\newpage
 
 ### Causalidad
 
-Para poder ver la causalidad entre las variables se aplico el test de causalidad en el sentido de Granger el cual muestra que ambas variables son significativas, ya que sus p-valor son muy pequenos, y sus F-estadistico es mayor que el valor critico del 5%. Por lo anterior se concluye que existe causalidad bidireccional entre el crecimiento economico y el consumo electrico $Cel \leftrightarrow CE$, esto apoya a la hipotesis de retroalimentacion.
+Para poder ver la causalidad entre las variables se aplicó el test de causalidad en el sentido de Granger el cual muestra que ambas variables son significativas, ya que sus p-valor son muy pequeños, y sus F-estadístico es mayor que el valor crítico del 5%. 
+
+Por lo anterior se concluye y los resultados presentados en los modelos, se concluye que existe una relación unidireccional que va desde el crecimiento económico hacia el consumo eléctrico, el efecto que existe es positivo, esto apoya la hipótesis conservadora entre la relación entre estas variables, también existe una relación causal en el sentido de Granger para el Consumo eléctrico y el crecimiento económico sin embargo esta no se toma en cuenta por su efecto negativo, lo cual en la bibliografía revisada no se vio esta relación. 
+
+
+$CE \rightarrow CEl$
 
 ```{r}
 dserie <- diff(serie)
@@ -158,22 +165,30 @@ gran2 = c(lmtest::grangertest(dserie[, 2] ~ dserie[,1], orden  = 1))
 )
 
 tibble(
-  Hipotesis = c("H0 = El Crecimiento economico no causa en el sentido de Granger al consumo electrico","H0 = El Consumo electrico no causa en el sentido de Granger al Crecimiento economico"),
+  Hipotesis = c("H0 = El Crecimiento económico no causa en el sentido de Granger al consumo electrico","H0 = El Consumo electrico no causa en el sentido de Granger al Crecimiento económico"),
   `F-test` = c(gran$gran1$F[3], gran$gran2$F[3]),
   `P-valor` = c(gran$gran1$`Pr(>F)`[3], gran$gran2$`Pr(>F)`[3])
-) %>% kable(caption = 'Test de Causalidad en el sentido de Granger')
+) %>% sable(caption = 'Test de Causalidad en el sentido de Granger')
 
 ```
+
+
 
 ### Impulso respuesta
 
 
-Algo importante que se analiza en los modelos VAR es ver como afectan los choques o innovaciones que surgen en las variables y si estos choques se transmiten o no a otras variables. La siguiente figura muestra los analisis de impulso respuesta de las 2 variables. Los resultados revelan que una
-shock positivo en el crecimiento economico este reaccionara positivamente en los 2 primeros meses para que luego se reajuste hasta que el anio 3 se vuelve negativo hasta el anio 4 donde comienza un comportamiento ascendente y seguira el mismo comportamiento cada 2 meses hasta que este efecto sea al final nulo. Por otra parte un shock en el consumo electrico probocara reducciones en el crecimiento economico hasta que el primer mes empieza a tomar valores negativos, hasta el mes 2 donde este se rajusta, este comportamiento se repite cada 2 meses.
+Algo importante que se analiza en los modelos VAR es ver cómo afectan los choques o innovaciones que surgen en las variables y si estos choques se transmiten o no a otras variables. Las siguientes figuras muestran los análisis de impulso respuesta.
+
+
+\newpage
+
+Los resultados revelan que un shock positivo en el consumo eléctrico al crecimiento económico este reaccionara positivamente en los 2 primeros meses para que luego se reajuste hasta que el año 3 se vuelve negativo hasta el año 4 donde comienza un comportamiento ascendente y seguirá el mismo comportamiento cada 2 meses hasta que este efecto sea al final nulo. Por otra parte, un shock en el consumo eléctrico provocara reducciones en el crecimiento económico hasta que el primer mes empieza a tomar valores negativos, hasta el mes 2 donde este se reajusta, este comportamiento se repite hasta que el efecto es nulo.
+
+
 
 ```{r, fig.cap='Impulso respuesta', fig.subcap=c('Producto percapita', 'Consumo percapita'), out.width='50%', fig.ncol=2, fig.align='center'}
-vars::irf(m3, impulse = 'cons_d', response = 'pib_d', n.ahead = 20, boot =T) %>% plot
-vars::irf(m3, impulse = 'pib_d', response = 'cons_d', n.ahead = 10, boot =T) %>% plot
+vars::irf(m1, impulse = 'cons_d', response = 'pib_d', n.ahead = 20, boot =T) %>% plot
+vars::irf(m1, impulse = 'pib_d', response = 'cons_d', n.ahead = 10, boot =T) %>% plot
 
 ```
 

@@ -6,6 +6,8 @@ output:
     extra_dependencies: subfig
 ---
 
+\newpage
+
 ```{r, echo = FALSE, include=FALSE, warning=FALSE}
 library(here)
 library(tidyverse)
@@ -26,7 +28,7 @@ knitr::opts_chunk$set(fig.pos = "h", # Fijar posicion de las figuras
 options(knitr.duplicate.label = "allow", # permitir Chunk names repetidos
         knitr.table.format = function() { # funcione de acuerdo a la salida del texto
   if (knitr::is_latex_output()) 'latex' else 'pandoc'
-}, digits = 2, 
+}, digits = 4, 
 kableExtra.auto_format = FALSE
 )
 datos <- read_rds(here('rdatos', '00datos.rds'))
@@ -39,46 +41,46 @@ datos <- read_rds(here('rdatos', '00datos.rds'))
 
 
 El suministro de electricidad consituye un servicio publico clave para que los procesos industriales operen normalmente asi como para sostener el consumo de los usuarios
-residenciales. Proporcionar una fuente de energia constante es una fuente de energia que
-impulse la actividad economica, ademas de manterner el funcionamiento los mercados y a la vez generar bienestar al permitir que los ciudadanos tengan altos estandares de calidad de vida. 
-Por lo que sin electricidad la actividad economica podria ser inviable, dado esta relevancia el sector electrico se encuentra con intervencion estatal, que en algunos paises 
-se manifiesta con empresas publicas y regulaciones a las actividades de las empresas privadas de acuerdo con los mecanismos de mercado. 
-En el Peru el enfoque en la generacion electrica es via mercados competitivos, y para fomentar la inversion privada en la infraestructura, se debe desarrollar una regulacion
-que promueva la eficiencia economica en los sectores sujetos a condiciones de monopolio natural ^[En el sector electrico destacan la transmision y distribucion electrica las cuales estan sujetas a tarifas electricas eficientes, 
-por otro lado la comercializacion electrica en otros paises esta en base a la competencia 
-en el Peru la distribuidora aume ese papel tambien.], asi cmo la supervicion del cumplimiento de las normas de seguridad aplicables al sector, lo anterior en el Peru esta a cargo del Organismo Supervisor de la Inversión en Energía y Minería (Osinergmin)
-el cual cuenta con autonomia gubernamental. 
+residenciales. Proporcionar una fuente de energía constante es una fuente de energía que
+impulse la actividad económica, además de mantener el funcionamiento los mercados y a la vez generar bienestar al permitir que los ciudadanos tengan altos estándares de calidad de vida. 
+Por lo que sin electricidad la actividad económica podría ser inviable, dado esta relevancia el sector eléctrico se encuentra con intervención estatal, que en algunos países 
+se manifiesta con empresas públicas y regulaciones a las actividades de las empresas privadas de acuerdo con los mecanismos de mercado. 
+En el Perú el enfoque en la generación eléctrica es vía mercados competitivos, y para fomentar la inversión privada en la infraestructura, se debe desarrollar una regulación
+que promueva la eficiencia económica en los sectores sujetos a condiciones de monopolio natural ^[En el sector eléctrico destacan la transmisión y distribución eléctrica las cuales están sujetas a tarifas eléctricas eficientes, 
+por otro lado, la comercialización eléctrica en otros países está en base a la competencia 
+en el Perú la distribuidora asume ese papel también.], así como la supervisión del cumplimiento de las normas de seguridad aplicables al sector, lo anterior en el Perú está a cargo del Organismo Supervisor de la Inversión en Energía y Minería (Osinergmin)
+el cual cuenta con autonomía gubernamental. 
 
-En los ultimos anios se observo un importante desarrollo del sector electico en el Peru, en promedio, tuvo un crecimiento de alrededor del 8% anual, sosteniendo el crecimiento de la actividad economica, 
-la cual alcanzo tasas de crecimiento 4%. Por otro lado tambien se observo una disminucion de la pobreza energetiva y el mayor acceso de la poblacion a los servicios energeticos se volvieron prioridad de 
-politica publica. Para resaltar, la cobertura eléctrica nacional pasó de 69.8% en 2001 a
-92.0% en 2014 y, en la zonas rurales, de 24.4% a 75.2%, estas politicas de energia aun siguen vigentes, ademas un Decreto legisltaivo que mejora la Regulación de la Distribución de Electricidad para promover un
+En los últimos años se observó un importante desarrollo del sector electico en el Perú, en promedio, tuvo un crecimiento de alrededor del 8% anual, sosteniendo el crecimiento de la actividad económica, 
+la cual alcanzo tasas de crecimiento 4%. Por otro lado, también se observó una disminución de la pobreza energética y el mayor acceso de la población a los servicios energéticos se volvieron prioridad de 
+political publica. Para resaltar, la cobertura eléctrica nacional pasó de 69.8% en 2001 a
+92.0% en 2014 y, en las zonas rurales, de 24.4% a 75.2%, estas políticas de energía aún siguen vigentes, además un Decreto legislativo que mejora la Regulación de la Distribución de Electricidad para promover un
 mayor grado de acceso y uso de la energía eléctrica en el Perú con altos estándares de calidad e innovación  @Osinergmin2017. 
 
-Los principales demandantes de grandes cantidades de energia son la mineria y la industria, las cuales por las caracteristica economicas 
-necesitan electricidad en casi todas las etapas de su actividad economica, con su alta demanda electrica ya no estan sujetas a las regulaciones de precios en este caso 
-se les llama "usuarios libres"^[Consumidores que su consumo superior a 2.5 MW los que estan en el rango 0.2 - 2.5 MW, pueden decidir si forman parte de los usuarios libres],
-los cuales pueden acordar el precio al cual comprar la energia electrica. Ya que en el Peru, la entrada a "trabajar" por parte de las generadoras esta en base al menor costo, donde 
-las empresas con menores costos son las que entran primero a vender electricidad en este caso las empresas generadoras hidraulicas, luego entran las de quema de conbustible 
+Los principales demandantes de grandes cantidades de energía son la minería y la industria, las cuales por las características económicas 
+necesitan electricidad en casi todas las etapas de su actividad económica, con su alta demanda eléctrica ya no están sujetas a las regulaciones de precios en este caso 
+se les llama "usuarios libres"^[Consumidores que su consumo superior a 2.5 MW los que están en el rango 0.2 - 2.5 MW, pueden decidir si forman parte de los usuarios libres],
+los cuales pueden acordar el precio al cual comprar la energía eléctrica. Ya que, en el Perú, la entrada a "trabajar" por parte de las generadoras está en base al menor costo, donde 
+las empresas con menores costos son las que entran primero a vender electricidad en este caso las empresas generadoras hidráulicas, luego entran las de quema de combustible 
 pero se prioriza centrales que funcionan a base de gas natural.
 
-Dada estas implicancias sobre la energia electrica,  los agentes que interactuan en el mercado categorizan a la
+Dada estas implicancias sobre la energía eléctrica, los agentes que interactúan en el mercado categorizan a la
 electricidad como un bien intermedio dentro de sus procesos de producción, pues requieren de una fuente de energía continua y sostenible que permita satisfacer sus necesidades de producción influenciadas por la dinámica de crecimiento económico del país. En tal sentido, la demanda
-eléctrica comercial e industrial también es considerada una demanda derivada a las necesidades productivas de los agentes económicos involucrados y dada las particularidades de la energia la cual impide que sea almacenada a 
-gran escala a costos viables, se requiere que la oferta tenga la sufiente capacida instalada para poder atender lo mas pronto posible estados anormales de demanda electrica.  
+eléctrica comercial e industrial también es considerada una demanda derivada a las necesidades productivas de los agentes económicos involucrados y dada las particularidades de la energía la cual impide que sea almacenada a 
+gran escala a costos viables, se requiere que la oferta tenga la suficiente capacidad instalada para poder atender lo más pronto posible estados anormales de demanda eléctrica.  
 
-Por su parte el Producto Interno Bruto (PIB) per capita, es uno de los indicadores de bienestar de la poblacion, asi que casi siempre hay politicas orientadas a estimular el
-crecimiento economico, las teorias sobre los principales componentes que causan un crecimiento economico sostenido han evolucionado desde que *Solow* el cual presento un modelo de 
-crecimiento economico. Ahora los modelos incluyen variables nuevas por ejemplo, de capital humano, inversion de capital intangible, institucionalidad, recursos energeticos y muchos mas; 
-ya que la base del crecimiento economico es el incremento de la productividad de los elementos incluidos en un modelos, es importante saber cuales son los impactos
-de las variables al crecimiento economico, ademas de saber las condiciones iniciales necesarias para que estas actuaen por el canal de transmision correcto.
+Por su parte el Producto Interno Bruto (PIB) per cápita, es uno de los indicadores de bienestar de la población, así que casi siempre hay políticas orientadas a estimular el
+crecimiento económico, las teorías sobre los principales componentes que causan un crecimiento económico sostenido han evolucionado desde que *Solow* el cual presento un modelo de 
+crecimiento económico. Ahora los modelos incluyen variables nuevas, por ejemplo, de capital humano, inversión de capital intangible, institucionalidad, recursos energéticos y muchos más; 
+ya que la base del crecimiento económico es el incremento de la productividad de los elementos incluidos en un modelo, es importante saber cuáles son los impactos
+de las variables al crecimiento económico, además de saber las condiciones iniciales necesarias para que estas actuaren por el canal de transmisión correcto.
 
-Ya que el Producto per capita es visto como un indicador de bienestar es tomado usualmente en estos modelos economico de crecimiento,
-debido a que el objetivo de las economias es lograr un mayor bienestar para todos lo habitantes, se ha convertido en principio de discursos politicos
-y de politica publica. Pero no solo es tener crecimiento economico, lo que se requiere es que el crecimiento economico sea sostenido en el largo plazo ademas
-de que sea poco influenciable por variables altamente volatiles, para que shock no afecte en demasia al crecimiento. Y dada la crisis sanitaria que actual se vive en el mundo
-basicamente todas las economias vieron una caida en el PIB, y dado esto es importante poder impulsar el crecimiento cuando esta crisis sanitaria 
-termine.
+Ya que el Producto per cápita es visto como un indicador de bienestar es tomado usualmente en estos modelos económico de crecimiento,
+debido a que el objetivo de las economías es lograr un mayor bienestar para todos los habitantes, se ha convertido en principio de discursos políticos
+y de política pública. Pero no solo es tener crecimiento económico, lo que se requiere es que el crecimiento económico sea sostenido en el largo plazo, además
+de que sea poco influenciable por variables altamente volátiles, para que shock no afecte en demasía al crecimiento. Y dada la crisis sanitaria que actual se vive en el mundo
+básicamente todas las economías vieron una caída en el PIB, y dado esto es importante poder impulsar el crecimiento cuando esta crisis sanitaria termine.
+
 <!-- El suministro de electricidad constituye un servicio público clave para operar
 procesos industriales y sostener el consumo de los usuarios residenciales.
 Así, brinda una fuente de energía que impulsa la actividad económica,
@@ -124,9 +126,7 @@ autónoma y transparente. -->
 
 ## Importancia de la investigacion 
 
-Actualmente las investigaciones en el peru respecto a la relacion crecimiento economico y consumo de electricidad son escazos, 
-por lo que aun no se sabe empiricamente el mecanismo  de trasmision del tema. Por loque el desarrollo de la investigacion tratara 
-de cubrir ese vacio en literatura para que pueda servir tanto para la aplicacion de politica publica o optimizacion eficiente de los recursos energeticos. 
+Actualmente las investigaciones en el Perú respecto a la relación crecimiento económico y consumo de electricidad son escasos, por lo que aún no se sabe empíricamente el mecanismo de trasmisión del tema. Por lo que el desarrollo de la investigación tratara de cubrir ese vacío en literatura para que pueda servir tanto para la aplicación de política pública u optimización eficiente de los recursos energéticos.
 
 
 
