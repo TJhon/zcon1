@@ -12,11 +12,19 @@ library(tidyverse)
 library(kableExtra)
 library(e1071)   
 library(ggfortify)
-library(ggplottimeseries)
 library(GGally)
 library(tsibble)
 library(lubridate)
 datos <- read_rds(here('rdatos', '00datos.rds'))
+# import code  
+# libreris necesarias 
+#library(tidyverse)
+#library(kableExtra)
+sable <- function(x, escape = T, booktabs = T, caption = "", longtable = T, optio  = c("stripted", "hold_position"), full = T) {
+  kable(x, escape = escape, booktabs = T, caption = caption, longtable = longtable) %>%
+    kable_styling(latex_options =  optio, full_width = full, position = "center")
+}
+
 ```
 
 A continuación se muestra los hechos resaltantes de las variables relevantes en la investigación.
@@ -72,7 +80,7 @@ A el PIB nacional en periodo 2007 - 2011 tuvo un crecimiento promedio de 4.90%, 
 el periodo 2015-2019 de un 3.05%, pero para los datos disponibles del 2020 se nota un decrecimiento de la economía, de un 21%.
 Mientras que para otros sectores productivos tiene casi el mismo comportamiento, 
 el promedio de las tasas de crecimiento de los sectores en el periodo temporal 2007 - 2020.4, 
-cómo se puede observar, los sectores que más crecieron en el periodo `r names(h1)[2]` fueron los sectores de construcción y los otros servicios, el cual tiene incluido a las prestaciones de servicios financieros, para el periodo `r names(h1)[3]` en promedio el sector construcción cayo a casi la mitad de su crecimiento del anterior periodo mencionado, por otra parte la tasa de crecimiento de sector "Otros servicios" tenía tendencia a la baja, hasta el siguiente periodo `r names(h1)[4]` el cual casi todos los sectores en promedio solo fue de 3.5%, por ultimo desde inicios del 2020 se registró caídas abruptas en los sectores de construcción (`r h1[1,5]` %), manufactura (`r h1[2,5]` %) y minería(`r h1[3,5]` %).
+cómo se puede observar, los sectores que más crecieron en el periodo `r names(h1)[[2]]` fueron los sectores de construcción y los otros servicios, el cual tiene incluido a las prestaciones de servicios financieros, para el periodo `r names(h1)[[3]]` en promedio el sector construcción cayo a casi la mitad de su crecimiento del anterior periodo mencionado, por otra parte la tasa de crecimiento de sector "Otros servicios" tenía tendencia a la baja, hasta el siguiente periodo `r names(h1)[[4]]` el cual casi todos los sectores en promedio solo fue de 3.5%, por ultimo desde inicios del 2020 se registró caídas abruptas en los sectores de construcción (`r h1[1,5][[1]]` %), manufactura (`r h1[2,5][[1]]` %) y minería(`r h1[3,5][[1]]` %).
 
 
 \newpage
