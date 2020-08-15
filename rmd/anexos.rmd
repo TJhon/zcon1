@@ -1,5 +1,7 @@
 # Anexos
 
+<!-- nada para mostrar -->
+
 ```{r, include=F}
 library(here)
 library(lubridate)
