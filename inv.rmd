@@ -15,6 +15,7 @@ lang: es
 bibliography: bib/ref1.bib
 ---
 
+<!-- somaente mas texto -->
 
 <!-- lo que esta escrito en estos signos se omiten en la compilacion del documento -->
 <!-- https://bookdown.org/singh_pratap_tejendra/intro_time_series_r/multivariate-ts-analysis.html -->
